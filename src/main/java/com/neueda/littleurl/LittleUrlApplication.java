@@ -9,5 +9,5 @@ public class LittleUrlApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LittleUrlApplication.class, args);
 	}
-
+	
 }
