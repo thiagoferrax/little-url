@@ -16,10 +16,16 @@ public class UrlResources {
 	
 	@Autowired
 	private UrlService service;
+
+	/*
+	 * @RequestMapping(value="/shorten", method=RequestMethod.POST) public
+	 * ResponseEntity<?> save(@RequestBody String longUrl) { Url url =
+	 * service.findOrCreate(longUrl); return ResponseEntity.ok().body(url); }
+	 */
 	
 	@RequestMapping(value="/{code}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable String code) {
 		Url url = service.find(code);
 		return ResponseEntity.ok().body(url);
-	}	
+	}		
 }
