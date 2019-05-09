@@ -1,5 +1,7 @@
 package com.neueda.littleurl.services;
 
+import static com.neueda.littleurl.domains.Url.URL_CODE_SIZE;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +13,18 @@ import com.neueda.littleurl.repositories.UrlRepository;
 
 @Service
 public class UrlService {
-	final static public int URL_CODE_SIZE = 6;
-	
 	@Autowired
 	private UrlRepository repository;
 
 	public Url find(String code) {
-		Optional<Url> optional = repository.findById(code);
-		return optional.orElse(null);
+		return repository.findById(code).orElse(null);
 	}
 
 	private Url recursiveInsert(String longUrl, int startIndex, int endIndex) {
 		String code = UrlShortnerHelper.generateShortURL(longUrl, startIndex, endIndex);
-
+	
 		Url url = find(code);
+		
 		if (url == null) {
 			url = repository.save(new Url(code, longUrl));
 		} else if (!url.getLongUrl().equals(longUrl)) {
