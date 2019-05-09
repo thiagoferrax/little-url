@@ -34,12 +34,11 @@ public class UrlService {
 		return url;
 	}
 
-	public Url findOrCreate(String longUrl) {
+	public Url findOrCreate(Url url) {
 		int startIndex = 0;
-		int endIndex = startIndex + URL_CODE_SIZE;
+		int endIndex = startIndex + URL_CODE_SIZE - 1;
+		String longUrl = url.getLongUrl();		
 		
-		Url url = recursiveInsert(longUrl, startIndex, endIndex);
-
-		return url;
+		return recursiveInsert(longUrl, startIndex, endIndex);
 	}
 }
