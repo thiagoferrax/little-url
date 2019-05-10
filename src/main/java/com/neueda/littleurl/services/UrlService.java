@@ -1,8 +1,6 @@
 package com.neueda.littleurl.services;
 
-import static com.neueda.littleurl.util.Constants.CODE_MUST_NOT_BE_NULL;
-import static com.neueda.littleurl.util.Constants.LONG_URL_MUST_NOT_BE_NULL;
-import static com.neueda.littleurl.util.Constants.URL_MUST_NOT_BE_NULL;
+import static com.neueda.littleurl.util.Constants.URL_CODE_SIZE;
 import static com.neueda.littleurl.util.Constants.URL_NOT_FOUND_FOR_CODE;
 
 import java.util.Optional;
@@ -15,7 +13,6 @@ import com.neueda.littleurl.dto.UrlDTO;
 import com.neueda.littleurl.helpers.UrlShortnerHelper;
 import com.neueda.littleurl.repositories.UrlRepository;
 import com.neueda.littleurl.services.exceptions.UrlNotFoundException;
-import com.neueda.littleurl.util.Constants;
 
 @Service
 public class UrlService {
@@ -24,10 +21,6 @@ public class UrlService {
 	private UrlRepository repository;
 
 	public Url find(String code) {
-		if (code == null) {
-			throw new IllegalArgumentException(CODE_MUST_NOT_BE_NULL);
-		}
-
 		Optional<Url> optional = repository.findById(code);
 		return optional.orElseThrow(() -> new UrlNotFoundException(URL_NOT_FOUND_FOR_CODE + code));
 	}
@@ -50,24 +43,12 @@ public class UrlService {
 	}
 
 	public Url findOrCreate(Url url) {
-		String longUrl = validate(url);
+		String longUrl = url.getLongUrl();
 		
 		int startIndex = 0;
-		int endIndex = startIndex + Constants.URL_CODE_SIZE - 1;
+		int endIndex = startIndex + URL_CODE_SIZE - 1;
 
 		return recursiveInsert(longUrl, startIndex, endIndex);
-	}
-
-	private String validate(Url url) {
-		if(url == null) {
-			throw new IllegalArgumentException(URL_MUST_NOT_BE_NULL);
-		}
-
-		String longUrl = url.getLongUrl();
-		if(longUrl == null) {
-			throw new IllegalArgumentException(LONG_URL_MUST_NOT_BE_NULL);
-		}
-		return longUrl;
 	}
 	
 	public Url fromDTO(UrlDTO urlDto) {

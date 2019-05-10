@@ -1,15 +1,11 @@
 package com.neueda.littleurl.services;
 
-import static com.neueda.littleurl.util.Constants.LONG_URL_MUST_NOT_BE_NULL;
 import static com.neueda.littleurl.util.Constants.URL_CODE_SIZE;
-import static com.neueda.littleurl.util.Constants.URL_MUST_NOT_BE_NULL;
 import static com.neueda.littleurl.util.Constants.URL_NOT_FOUND_FOR_CODE;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.util.Optional;
 
-import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,16 +31,7 @@ public class UrlServiceTest {
 	public void init() {
 		MockitoAnnotations.initMocks(this);
 	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void whenCodeIsNullThrowsIllegalArgumentException() {
-		// Given
-		String code = null;
-		
-		// When
-		service.find(code);
-	}
-
+	
 	@Test
 	public void whenCodeExistsReturnsUrl() {
 		// Given
@@ -74,39 +61,6 @@ public class UrlServiceTest {
 	}
 
 	@Test
-	public void whenUrlIsNullThrowsIllegalArgumentException() {
-		// Given
-		Url url = null;
-		
-		try {
-			// When
-			service.findOrCreate(url);
-			fail();
-		} catch(IllegalArgumentException e) {
-			// Then
-			Assert.assertThat(e.getMessage(), Matchers.is(URL_MUST_NOT_BE_NULL));
-		}		
-	}
-
-	@Test
-	public void whenLongUrlIsNullThrowsIllegalArgumentException() {
-		// Given
-		String code = null;
-		String longUrl = null;
-
-		Url url = new Url(code, longUrl);
-
-		try {
-			// When
-			service.findOrCreate(url);	
-			fail();
-		} catch(IllegalArgumentException e) {
-			// Then
-			Assert.assertThat(e.getMessage(), Matchers.is(LONG_URL_MUST_NOT_BE_NULL));
-		}
-	}
-
-	@Test
 	public void whenLongUrlDoesNotExistSaveItAndReturnNewUrlCode() {
 		// Given
 		String code = null;
@@ -127,7 +81,7 @@ public class UrlServiceTest {
 		Url newUrl = service.findOrCreate(urlToCreate);
 
 		// Then
-		assertEquals(url, newUrl);
+		Assert.assertEquals(url, newUrl);
 	}
 	
 	@Test
@@ -149,7 +103,7 @@ public class UrlServiceTest {
 		Url newUrl = service.findOrCreate(urlToCreate);
 
 		// Then
-		Assert.assertEquals(existingUrl, newUrl);
+		assertEquals(existingUrl, newUrl);
 	}
 	
 	@Test

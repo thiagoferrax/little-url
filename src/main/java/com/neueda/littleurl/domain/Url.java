@@ -9,8 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import com.neueda.littleurl.util.Constants;
-
 @Entity
 public class Url implements Serializable {
 	private static final long serialVersionUID = 1L;
