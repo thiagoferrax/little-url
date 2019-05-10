@@ -50,6 +50,7 @@ public class Url implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((longUrl == null) ? 0 : longUrl.hashCode());
 		return result;
 	}
 
@@ -67,6 +68,17 @@ public class Url implements Serializable {
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
+		if (longUrl == null) {
+			if (other.longUrl != null)
+				return false;
+		} else if (!longUrl.equals(other.longUrl))
+			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Url [code=" + code + ", longUrl=" + longUrl + "]";
+	}
+	
 }

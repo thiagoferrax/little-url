@@ -17,6 +17,8 @@ public class UrlService {
 
 	public static final String URL_NOT_FOUND_FOR_CODE = "Url not found for code ";
 	public static final String CODE_MUST_NOT_BE_NULL = "Code must not be null.";
+	public static final String URL_MUST_NOT_BE_NULL = "Url must not be null.";
+	public static final String LONG_URL_MUST_NOT_BE_NULL = "Long Url must not be null.";
 
 	@Autowired
 	private UrlRepository repository;
@@ -33,22 +35,38 @@ public class UrlService {
 	private Url recursiveInsert(String longUrl, int startIndex, int endIndex) {
 		String code = UrlShortnerHelper.generateShortURL(longUrl, startIndex, endIndex);
 
-		Url url = find(code);
-
-		if (url == null) {
+		Url url;
+		try {
+			url = find(code);
+			
+			if (!url.getLongUrl().equals(longUrl)) {
+				url = recursiveInsert(longUrl, startIndex + 1, endIndex + 1);
+			}			
+		} catch (UrlNotFoundException e) {
 			url = repository.save(new Url(code, longUrl));
-		} else if (!url.getLongUrl().equals(longUrl)) {
-			url = recursiveInsert(longUrl, endIndex + 1, endIndex + URL_CODE_SIZE);
-		}
+		}		
 
 		return url;
 	}
 
 	public Url findOrCreate(Url url) {
+		String longUrl = validate(url);
+		
 		int startIndex = 0;
 		int endIndex = startIndex + URL_CODE_SIZE - 1;
-		String longUrl = url.getLongUrl();
 
 		return recursiveInsert(longUrl, startIndex, endIndex);
+	}
+
+	private String validate(Url url) {
+		if(url == null) {
+			throw new IllegalArgumentException(URL_MUST_NOT_BE_NULL);
+		}
+
+		String longUrl = url.getLongUrl();
+		if(longUrl == null) {
+			throw new IllegalArgumentException(LONG_URL_MUST_NOT_BE_NULL);
+		}
+		return longUrl;
 	}
 }
