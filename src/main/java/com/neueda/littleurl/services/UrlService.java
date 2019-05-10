@@ -1,24 +1,24 @@
 package com.neueda.littleurl.services;
 
-import static com.neueda.littleurl.domains.Url.URL_CODE_SIZE;
+import static com.neueda.littleurl.util.Constants.CODE_MUST_NOT_BE_NULL;
+import static com.neueda.littleurl.util.Constants.LONG_URL_MUST_NOT_BE_NULL;
+import static com.neueda.littleurl.util.Constants.URL_MUST_NOT_BE_NULL;
+import static com.neueda.littleurl.util.Constants.URL_NOT_FOUND_FOR_CODE;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.neueda.littleurl.domains.Url;
+import com.neueda.littleurl.domain.Url;
+import com.neueda.littleurl.dto.UrlDTO;
 import com.neueda.littleurl.helpers.UrlShortnerHelper;
 import com.neueda.littleurl.repositories.UrlRepository;
 import com.neueda.littleurl.services.exceptions.UrlNotFoundException;
+import com.neueda.littleurl.util.Constants;
 
 @Service
 public class UrlService {
-
-	public static final String URL_NOT_FOUND_FOR_CODE = "Url not found for code ";
-	public static final String CODE_MUST_NOT_BE_NULL = "Code must not be null.";
-	public static final String URL_MUST_NOT_BE_NULL = "Url must not be null.";
-	public static final String LONG_URL_MUST_NOT_BE_NULL = "Long Url must not be null.";
 
 	@Autowired
 	private UrlRepository repository;
@@ -53,7 +53,7 @@ public class UrlService {
 		String longUrl = validate(url);
 		
 		int startIndex = 0;
-		int endIndex = startIndex + URL_CODE_SIZE - 1;
+		int endIndex = startIndex + Constants.URL_CODE_SIZE - 1;
 
 		return recursiveInsert(longUrl, startIndex, endIndex);
 	}
@@ -68,5 +68,9 @@ public class UrlService {
 			throw new IllegalArgumentException(LONG_URL_MUST_NOT_BE_NULL);
 		}
 		return longUrl;
+	}
+	
+	public Url fromDTO(UrlDTO urlDto) {
+		return new Url(urlDto.getCode(), urlDto.getLongUrl());
 	}
 }

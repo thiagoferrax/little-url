@@ -1,4 +1,7 @@
-package com.neueda.littleurl.domains;
+package com.neueda.littleurl.domain;
+
+import static com.neueda.littleurl.util.Constants.MAX_LONG_URL_SIZE;
+import static com.neueda.littleurl.util.Constants.URL_CODE_SIZE;
 
 import java.io.Serializable;
 
@@ -6,13 +9,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.neueda.littleurl.util.Constants;
+
 @Entity
 public class Url implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	public static final int URL_CODE_SIZE = 6;
-	public static final int MAX_LONG_URL_SIZE = 2048;
-	
+		
 	@Id
 	@Column(length = URL_CODE_SIZE)  
 	private String code;

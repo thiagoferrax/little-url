@@ -1,5 +1,10 @@
 package com.neueda.littleurl.services;
 
+import static com.neueda.littleurl.util.Constants.LONG_URL_MUST_NOT_BE_NULL;
+import static com.neueda.littleurl.util.Constants.URL_CODE_SIZE;
+import static com.neueda.littleurl.util.Constants.URL_MUST_NOT_BE_NULL;
+import static com.neueda.littleurl.util.Constants.URL_NOT_FOUND_FOR_CODE;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.Optional;
@@ -13,7 +18,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.neueda.littleurl.domains.Url;
+import com.neueda.littleurl.domain.Url;
 import com.neueda.littleurl.helpers.UrlShortnerHelper;
 import com.neueda.littleurl.repositories.UrlRepository;
 import com.neueda.littleurl.services.exceptions.UrlNotFoundException;
@@ -62,7 +67,7 @@ public class UrlServiceTest {
 		String notExistingCode = "2YpwKFJ";
 
 		Mockito.when(repository.findById(notExistingCode))
-				.thenThrow(new UrlNotFoundException(UrlService.URL_NOT_FOUND_FOR_CODE + notExistingCode));
+				.thenThrow(new UrlNotFoundException(URL_NOT_FOUND_FOR_CODE + notExistingCode));
 
 		// When
 		service.find(notExistingCode);
@@ -79,7 +84,7 @@ public class UrlServiceTest {
 			fail();
 		} catch(IllegalArgumentException e) {
 			// Then
-			Assert.assertThat(e.getMessage(), Matchers.is(UrlService.URL_MUST_NOT_BE_NULL));
+			Assert.assertThat(e.getMessage(), Matchers.is(URL_MUST_NOT_BE_NULL));
 		}		
 	}
 
@@ -97,7 +102,7 @@ public class UrlServiceTest {
 			fail();
 		} catch(IllegalArgumentException e) {
 			// Then
-			Assert.assertThat(e.getMessage(), Matchers.is(UrlService.LONG_URL_MUST_NOT_BE_NULL));
+			Assert.assertThat(e.getMessage(), Matchers.is(LONG_URL_MUST_NOT_BE_NULL));
 		}
 	}
 
@@ -109,11 +114,11 @@ public class UrlServiceTest {
 		Url urlToCreate = new Url(code, notExistingLongUrl);
 
 		int startIndex = 0;
-		int endIndex = startIndex + Url.URL_CODE_SIZE - 1;
+		int endIndex = startIndex + URL_CODE_SIZE - 1;
 		String notExistingCode = UrlShortnerHelper.generateShortURL(notExistingLongUrl, startIndex, endIndex);
 
 		Mockito.when(repository.findById(notExistingCode))
-				.thenThrow(new UrlNotFoundException(UrlService.URL_NOT_FOUND_FOR_CODE + notExistingCode));
+				.thenThrow(new UrlNotFoundException(URL_NOT_FOUND_FOR_CODE + notExistingCode));
 
 		Url url = new Url(notExistingCode, notExistingLongUrl);
 		Mockito.when(repository.save(url)).thenReturn(url);
@@ -122,7 +127,7 @@ public class UrlServiceTest {
 		Url newUrl = service.findOrCreate(urlToCreate);
 
 		// Then
-		Assert.assertEquals(url, newUrl);
+		assertEquals(url, newUrl);
 	}
 	
 	@Test
@@ -133,7 +138,7 @@ public class UrlServiceTest {
 		Url urlToCreate = new Url(code, existingLongUrl);
 
 		int startIndex = 0;
-		int endIndex = startIndex + Url.URL_CODE_SIZE - 1;
+		int endIndex = startIndex + URL_CODE_SIZE - 1;
 		String existingCode = UrlShortnerHelper.generateShortURL(existingLongUrl, startIndex, endIndex);		
 		
 		Url existingUrl = new Url(existingCode, existingLongUrl);
@@ -155,7 +160,7 @@ public class UrlServiceTest {
 		Url urlToCreate = new Url(code, notExistingLongUrl);
 
 		int startIndex = 0;
-		int endIndex = startIndex + Url.URL_CODE_SIZE - 1;
+		int endIndex = startIndex + URL_CODE_SIZE - 1;
 		String existingCode = UrlShortnerHelper.generateShortURL(notExistingLongUrl, startIndex, endIndex);		
 		
 		Url existingUrl = new Url(existingCode, "www.google.com");
@@ -167,7 +172,7 @@ public class UrlServiceTest {
 		String notExistingCode = UrlShortnerHelper.generateShortURL(notExistingLongUrl, startIndex, endIndex);		
 
 		Mockito.when(repository.findById(notExistingCode))
-		.thenThrow(new UrlNotFoundException(UrlService.URL_NOT_FOUND_FOR_CODE + notExistingCode));
+		.thenThrow(new UrlNotFoundException(URL_NOT_FOUND_FOR_CODE + notExistingCode));
 		
 		Url url = new Url(notExistingCode, notExistingLongUrl);
 		Mockito.when(repository.save(url)).thenReturn(url);
