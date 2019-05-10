@@ -15,7 +15,7 @@ import com.neueda.littleurl.domains.Url;
 import com.neueda.littleurl.services.UrlService;
 
 @RestController
-@RequestMapping(value = "/")
+@RequestMapping(value = "/urls")
 public class UrlResources {
 
 	@Autowired
