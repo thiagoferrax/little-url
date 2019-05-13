@@ -1,9 +1,7 @@
 version: '3'
 volumes:
    data:
-networks:
-   database-net:   
-   backend-net:      
+   m2:
 services:
    database:
       image: postgres:11.3
@@ -11,21 +9,16 @@ services:
       volumes:
          - data:/var/lib/postgresql/data
          - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
-      networks:
-         - database-net
    backend:
       container_name: neueda-littleurl-backend
       image: zenika/alpine-maven
       restart: always
       volumes:
          - .:/app
-         - ~/.m2:/root/.m2
+         - m2:/root/.m2
       working_dir: /app
       command: mvn clean spring-boot:run    
       ports:
          - 80:8080
-      networks:
-         - backend-net
-         - database-net
       depends_on:
          - database
