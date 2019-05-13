@@ -5,6 +5,8 @@ import static com.neueda.littleurl.util.Constants.URL_NOT_FOUND_FOR_CODE;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,15 +54,19 @@ public class UrlService {
 		return recursiveInsert(longUrl, startIndex, endIndex);
 	}
 	
+	public Url update(Url url) {
+		return repository.save(url);
+	}
+
+	public void remove(String code) {
+		repository.deleteById(code);
+	}
+	
 	public Url fromDTO(UrlDTO urlDto) {
 		return new Url(urlDto.getCode(), urlDto.getLongUrl());
 	}
-
-	public Url fromUDTO(UrlUpdateDTO urlDto) {
-		return new Url(urlDto.getCode(), urlDto.getLongUrl());
-	}
 	
-	public Url update(Url url) {
-		return repository.save(url);
+	public Url fromUrlUpdateDTO(@Valid UrlUpdateDTO urlDto) {
+		return new Url(urlDto.getCode(), urlDto.getLongUrl());
 	}
 }

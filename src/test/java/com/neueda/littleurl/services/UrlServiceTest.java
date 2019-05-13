@@ -37,7 +37,7 @@ public class UrlServiceTest {
 		// Given
 		String existingCode = "3077yW";
 
-		Url existingUrl = new Url(existingCode, "www.neueda.com");
+		Url existingUrl = new Url(existingCode, "http://www.neueda.com");
 		Optional<Url> optional = Optional.of(existingUrl);
 		Mockito.when(repository.findById(existingCode)).thenReturn(optional);
 
@@ -64,7 +64,7 @@ public class UrlServiceTest {
 	public void whenLongUrlDoesNotExistSaveItAndReturnNewUrlCode() {
 		// Given
 		String code = null;
-		String notExistingLongUrl = "www.neueda.com";
+		String notExistingLongUrl = "http://www.neueda.com";
 		Url urlToCreate = new Url(code, notExistingLongUrl);
 
 		int startIndex = 0;
@@ -88,7 +88,7 @@ public class UrlServiceTest {
 	public void whenLongUrlExistsFindItAndReturnExistingUrlCode() {
 		// Given
 		String code = null;
-		String existingLongUrl = "www.neueda.com";
+		String existingLongUrl = "http://www.neueda.com";
 		Url urlToCreate = new Url(code, existingLongUrl);
 
 		int startIndex = 0;
@@ -110,14 +110,14 @@ public class UrlServiceTest {
 	public void whenLongUrlDoesNotExistButGeneratedCodeExistsThenSaveANewCodeAndReturnIt() {
 		// Given
 		String code = null;
-		String notExistingLongUrl = "www.google.com";
+		String notExistingLongUrl = "http://www.google.com";
 		Url urlToCreate = new Url(code, notExistingLongUrl);
 
 		int startIndex = 0;
 		int endIndex = startIndex + URL_CODE_SIZE - 1;
 		String existingCode = UrlShortnerHelper.generateShortURL(notExistingLongUrl, startIndex, endIndex);		
 		
-		Url existingUrl = new Url(existingCode, "www.neueda.com");
+		Url existingUrl = new Url(existingCode, "http://www.neueda.com");
 		Optional<Url> optional = Optional.of(existingUrl);
 		Mockito.when(repository.findById(existingCode)).thenReturn(optional);
 

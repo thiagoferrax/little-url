@@ -5,12 +5,13 @@ volumes:
 services:
    database:
       image: postgres:11.3
-      container_name: neueda-littleurl-database
+      environment:
+         - POSTGRES_DB=littleurl
+         - POSTGRES_USER=postgres
+         - POSTGRES_PASSWORD=postgres
       volumes:
          - data:/var/lib/postgresql/data
-         - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
    backend:
-      container_name: neueda-littleurl-backend
       image: zenika/alpine-maven
       restart: always
       volumes:

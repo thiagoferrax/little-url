@@ -9,6 +9,8 @@ import java.net.URI;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +23,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.neueda.littleurl.domain.Url;
 import com.neueda.littleurl.dto.UrlDTO;
+import com.neueda.littleurl.dto.UrlUpdateDTO;
 import com.neueda.littleurl.services.UrlService;
 import com.neueda.littleurl.services.exceptions.UrlNotFoundException;
 
 @RestController
 @RequestMapping(value = "/urls")
 public class UrlResources {
+	Logger logger = LoggerFactory.getLogger(UrlResources.class);
 	
 	@Autowired
 	private UrlService service;
@@ -34,7 +38,7 @@ public class UrlResources {
 	@RequestMapping(value = "/{code}", method = GET)
 	public ResponseEntity<?> findAndRedirect(@PathVariable String code) {
 		ResponseEntity<?> responseEntity;
-
+		
 		try {
 			Url url = service.find(code);
 
@@ -75,11 +79,19 @@ public class UrlResources {
 	}
 	
 	@RequestMapping(value = "/", method = PUT)
-	public ResponseEntity<?> update(@Valid @RequestBody UrlDTO urlDto) {
+	public ResponseEntity<?> update(@Valid @RequestBody UrlUpdateDTO urlDto) {
 		
-		Url url = service.fromDTO(urlDto);
+		Url url = service.fromUrlUpdateDTO(urlDto);
 		url = service.update(url);
 		
 		return ResponseEntity.ok().body(url);
+	}
+	
+	@RequestMapping(value = "/{code}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> delete(@PathVariable String code) {
+		
+		service.remove(code);
+		
+		return ResponseEntity.ok().build();
 	}
 }

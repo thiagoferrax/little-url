@@ -25,6 +25,12 @@ public class UrlDTO implements Serializable {
 	public UrlDTO() {
 	}
 
+	public UrlDTO(String code, @NotNull @NotEmpty @URL @Length(max = 2048) String longUrl) {
+		super();
+		this.code = code;
+		this.longUrl = longUrl;
+	}
+
 	public String getCode() {
 		return code;
 	}
