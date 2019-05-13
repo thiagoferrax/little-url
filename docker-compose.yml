@@ -21,7 +21,7 @@ services:
          - .:/app
          - ~/.m2:/root/.m2
       working_dir: /app
-      command: mvn install  
+      command: mvn clean spring-boot:run    
       ports:
          - 80:8080
       networks:
