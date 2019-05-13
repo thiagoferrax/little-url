@@ -3,6 +3,7 @@ package com.neueda.littleurl.resources;
 import static org.springframework.http.HttpStatus.MOVED_PERMANENTLY;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 import java.net.URI;
 
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -30,7 +32,7 @@ public class UrlResources {
 	private UrlService service;
 
 	@RequestMapping(value = "/{code}", method = GET)
-	public ResponseEntity<?> find(@PathVariable String code) {
+	public ResponseEntity<?> findAndRedirect(@PathVariable String code) {
 		ResponseEntity<?> responseEntity;
 
 		try {
@@ -46,9 +48,23 @@ public class UrlResources {
 
 		return responseEntity;
 	}
+	
+	@RequestMapping(value = "/{code}/longUrl", method = GET)
+	public ResponseEntity<?> find(@PathVariable String code) {
+		ResponseEntity<?> responseEntity;
+
+		try {
+			Url url = service.find(code);
+			responseEntity = ResponseEntity.ok().body(url);
+		} catch (UrlNotFoundException e) {
+			responseEntity = ResponseEntity.notFound().build();
+		}
+
+		return responseEntity;
+	}
 
 	@RequestMapping(value = "/", method = POST)
-	public ResponseEntity<?> save(@Valid @RequestBody UrlDTO urlDto) {
+	public ResponseEntity<?> findOrCreate(@Valid @RequestBody UrlDTO urlDto) {
 		Url url = service.fromDTO(urlDto);
 		url = service.findOrCreate(url);
 
@@ -56,5 +72,14 @@ public class UrlResources {
 				.toUri();
 		
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value = "/", method = PUT)
+	public ResponseEntity<?> update(@Valid @RequestBody UrlDTO urlDto) {
+		
+		Url url = service.fromDTO(urlDto);
+		url = service.update(url);
+		
+		return ResponseEntity.ok().body(url);
 	}
 }

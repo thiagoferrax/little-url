@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.neueda.littleurl.domain.Url;
 import com.neueda.littleurl.dto.UrlDTO;
+import com.neueda.littleurl.dto.UrlUpdateDTO;
 import com.neueda.littleurl.helpers.UrlShortnerHelper;
 import com.neueda.littleurl.repositories.UrlRepository;
 import com.neueda.littleurl.services.exceptions.UrlNotFoundException;
@@ -53,5 +54,13 @@ public class UrlService {
 	
 	public Url fromDTO(UrlDTO urlDto) {
 		return new Url(urlDto.getCode(), urlDto.getLongUrl());
+	}
+
+	public Url fromUDTO(UrlUpdateDTO urlDto) {
+		return new Url(urlDto.getCode(), urlDto.getLongUrl());
+	}
+	
+	public Url update(Url url) {
+		return repository.save(url);
 	}
 }
