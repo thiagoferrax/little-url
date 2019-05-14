@@ -7,7 +7,7 @@
 
 LittleUrl is an API for short URL creation.  
 
-The main requirements that guided the design and implementation of LittleUrl were:
+The main requirements that guided the design and implementation of LittleUrl:
 *	Design and implement an API for short URL creation
 *	Implement forwarding of short URLs to the original ones
 *	There should be some form of persistent storage
@@ -23,14 +23,6 @@ There are still some important requirements that will guide the next steps of th
 * Design and Implement a caching to improve API performance
 
 ## Architecture overview
-
-#### Tech stack
-* [Spring Boot](http://spring.io/projects/spring-boot) for creating the RESTful Web Services
-* [MockMVC](https://spring.io/guides/gs/testing-web/) for testing the Web Layer
-* [Mockito](https://site.mockito.org/) for testing the Services Layer
-* [Postgres](https://www.postgresql.org/) as database
-* [Maven](https://maven.apache.org/) for managing the project's build
-* [Docker](https://www.docker.com/) for building and managing the application distribution using containers 
 
 #### Project structure
 ```
@@ -77,9 +69,17 @@ There are still some important requirements that will guide the next steps of th
 ├── pom.xml
 └── README.md
 ```
-#### Overview
+#### Overview picture
 
 ![littleurl](https://user-images.githubusercontent.com/43149895/57698153-5009c680-762b-11e9-930b-86a55b7a2435.png)
+
+#### Tech stack
+* [Spring Boot](http://spring.io/projects/spring-boot) for creating the RESTful Web Services
+* [MockMVC](https://spring.io/guides/gs/testing-web/) for testing the Web Layer
+* [Mockito](https://site.mockito.org/) for testing the Services Layer
+* [Postgres](https://www.postgresql.org/) as database
+* [Maven](https://maven.apache.org/) for managing the project's build
+* [Docker](https://www.docker.com/) for building and managing the application distribution using containers 
 
 ## Install
 #### Download the repository
