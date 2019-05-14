@@ -15,6 +15,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.neueda.littleurl.domain.Url;
+import com.neueda.littleurl.dto.UrlDTO;
+import com.neueda.littleurl.dto.UrlUpdateDTO;
 import com.neueda.littleurl.helpers.UrlShortnerHelper;
 import com.neueda.littleurl.repositories.UrlRepository;
 import com.neueda.littleurl.services.exceptions.UrlNotFoundException;
@@ -31,7 +33,7 @@ public class UrlServiceTest {
 	public void init() {
 		MockitoAnnotations.initMocks(this);
 	}
-	
+
 	@Test
 	public void whenCodeExistsReturnsUrl() {
 		// Given
@@ -83,7 +85,7 @@ public class UrlServiceTest {
 		// Then
 		Assert.assertEquals(url, newUrl);
 	}
-	
+
 	@Test
 	public void whenLongUrlExistsFindItAndReturnExistingUrlCode() {
 		// Given
@@ -93,8 +95,8 @@ public class UrlServiceTest {
 
 		int startIndex = 0;
 		int endIndex = startIndex + URL_CODE_SIZE - 1;
-		String existingCode = UrlShortnerHelper.generateShortURL(existingLongUrl, startIndex, endIndex);		
-		
+		String existingCode = UrlShortnerHelper.generateShortURL(existingLongUrl, startIndex, endIndex);
+
 		Url existingUrl = new Url(existingCode, existingLongUrl);
 		Optional<Url> optional = Optional.of(existingUrl);
 		Mockito.when(repository.findById(existingCode)).thenReturn(optional);
@@ -105,7 +107,7 @@ public class UrlServiceTest {
 		// Then
 		assertEquals(existingUrl, newUrl);
 	}
-	
+
 	@Test
 	public void whenLongUrlDoesNotExistButGeneratedCodeExistsThenSaveANewCodeAndReturnIt() {
 		// Given
@@ -115,19 +117,19 @@ public class UrlServiceTest {
 
 		int startIndex = 0;
 		int endIndex = startIndex + URL_CODE_SIZE - 1;
-		String existingCode = UrlShortnerHelper.generateShortURL(notExistingLongUrl, startIndex, endIndex);		
-		
+		String existingCode = UrlShortnerHelper.generateShortURL(notExistingLongUrl, startIndex, endIndex);
+
 		Url existingUrl = new Url(existingCode, "http://www.neueda.com");
 		Optional<Url> optional = Optional.of(existingUrl);
 		Mockito.when(repository.findById(existingCode)).thenReturn(optional);
 
 		startIndex = startIndex + 1;
 		endIndex = endIndex + 1;
-		String notExistingCode = UrlShortnerHelper.generateShortURL(notExistingLongUrl, startIndex, endIndex);		
+		String notExistingCode = UrlShortnerHelper.generateShortURL(notExistingLongUrl, startIndex, endIndex);
 
 		Mockito.when(repository.findById(notExistingCode))
-		.thenThrow(new UrlNotFoundException(URL_NOT_FOUND_FOR_CODE + notExistingCode));
-		
+				.thenThrow(new UrlNotFoundException(URL_NOT_FOUND_FOR_CODE + notExistingCode));
+
 		Url url = new Url(notExistingCode, notExistingLongUrl);
 		Mockito.when(repository.save(url)).thenReturn(url);
 
@@ -138,4 +140,58 @@ public class UrlServiceTest {
 		Assert.assertEquals(url, newUrl);
 	}
 
+	@Test
+	public void whenUpdatinAnUrlVerifyThatRepositorySaveIsCalled() {
+		// Given
+		String existingCode = "3077yW";
+		Url existingUrl = new Url(existingCode, "http://www.neueda.com");
+
+		// When
+		service.update(existingUrl);
+
+		// Then
+		Mockito.verify(repository).save(existingUrl);
+	}
+	
+	@Test
+	public void whenDeletingAnUrlVerifyThatRepositoryDeleteByIdIsCalled() {
+		// Given
+		String existingCode = "3077yW";
+
+		// When
+		service.remove(existingCode);
+
+		// Then
+		Mockito.verify(repository).deleteById(existingCode);
+	}
+	
+	@Test
+	public void whenBuildingUrlFromDtoReturnAnUrlWithSameCodeAndLongUrl() {
+		// Given
+		String existingCode = "3077yW";
+		String existingLongUrl = "http://www.neueda.com";
+
+		// When
+		UrlDTO urlDto = new UrlDTO(existingCode, existingLongUrl);
+		Url url = service.fromDTO(urlDto);
+
+		// Then
+		Url expectedUrl = new Url(existingCode, existingLongUrl);
+		assertEquals(expectedUrl, url);
+	}
+	
+	@Test
+	public void whenBuildingUrlFromUpdateDtoReturnAnUrlWithSameCodeAndLongUrl() {
+		// Given
+		String existingCode = "3077yW";
+		String existingLongUrl = "http://www.neueda.com";
+
+		// When
+		UrlUpdateDTO urlDto = new UrlUpdateDTO(existingCode, existingLongUrl);
+		Url url = service.fromUpdateDTO(urlDto);
+
+		// Then
+		Url expectedUrl = new Url(existingCode, existingLongUrl);
+		assertEquals(expectedUrl, url);
+	}
 }

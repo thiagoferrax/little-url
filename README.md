@@ -19,10 +19,10 @@ The main requirements that guided the design and implementation of LittleUrl wer
 
 There are still some important requirements that will guide the next steps of this API implementation:
 * Design and implement an API for gathering different statistics
-* Implement an authentication service
-* Implement a caching to improve API performance
+* Design and Implement an authentication service
+* Design and Implement a caching to improve API performance
 
-## Tech stack details:
+## Tech stack
 
 * [Spring Boot](http://spring.io/projects/spring-boot) for creating the RESTful Web Services
 * [MockMVC](https://spring.io/guides/gs/testing-web/) for testing the Web Layer

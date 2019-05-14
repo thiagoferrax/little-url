@@ -66,7 +66,7 @@ public class UrlService {
 		return new Url(urlDto.getCode(), urlDto.getLongUrl());
 	}
 	
-	public Url fromUrlUpdateDTO(@Valid UrlUpdateDTO urlDto) {
+	public Url fromUpdateDTO(@Valid UrlUpdateDTO urlDto) {
 		return new Url(urlDto.getCode(), urlDto.getLongUrl());
 	}
 }

@@ -81,7 +81,7 @@ public class UrlResources {
 	@RequestMapping(value = "/", method = PUT)
 	public ResponseEntity<?> update(@Valid @RequestBody UrlUpdateDTO urlDto) {
 		
-		Url url = service.fromUrlUpdateDTO(urlDto);
+		Url url = service.fromUpdateDTO(urlDto);
 		url = service.update(url);
 		
 		return ResponseEntity.ok().body(url);
