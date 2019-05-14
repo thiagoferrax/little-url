@@ -13,6 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.internal.verification.VerificationModeFactory;
+import org.mockito.verification.VerificationMode;
 
 import com.neueda.littleurl.domain.Url;
 import com.neueda.littleurl.dto.UrlDTO;
@@ -144,8 +146,12 @@ public class UrlServiceTest {
 	public void whenUpdatinAnUrlVerifyThatRepositorySaveIsCalled() {
 		// Given
 		String existingCode = "3077yW";
-		Url existingUrl = new Url(existingCode, "http://www.neueda.com");
+		String existingLongUrl = "http://www.neueda.com";
+		Url existingUrl = new Url(existingCode, existingLongUrl);
 
+		Optional<Url> optional = Optional.of(existingUrl);
+		Mockito.when(repository.findById(existingCode)).thenReturn(optional);
+		
 		// When
 		service.update(existingUrl);
 
@@ -158,6 +164,10 @@ public class UrlServiceTest {
 		// Given
 		String existingCode = "3077yW";
 
+		Url existingUrl = new Url(existingCode, "http://www.neueda.com");
+		Optional<Url> optional = Optional.of(existingUrl);
+		Mockito.when(repository.findById(existingCode)).thenReturn(optional);
+		
 		// When
 		service.remove(existingCode);
 

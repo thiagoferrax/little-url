@@ -31,14 +31,14 @@ import com.neueda.littleurl.services.exceptions.UrlNotFoundException;
 @RequestMapping(value = "/urls")
 public class UrlResources {
 	Logger logger = LoggerFactory.getLogger(UrlResources.class);
-	
+
 	@Autowired
 	private UrlService service;
 
 	@RequestMapping(value = "/{code}", method = GET)
 	public ResponseEntity<?> findAndRedirect(@PathVariable String code) {
 		ResponseEntity<?> responseEntity;
-		
+
 		try {
 			Url url = service.find(code);
 
@@ -52,7 +52,7 @@ public class UrlResources {
 
 		return responseEntity;
 	}
-	
+
 	@RequestMapping(value = "/{code}/longUrl", method = GET)
 	public ResponseEntity<?> find(@PathVariable String code) {
 		ResponseEntity<?> responseEntity;
@@ -74,24 +74,25 @@ public class UrlResources {
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{code}").buildAndExpand(url.getCode())
 				.toUri();
-		
+
 		return ResponseEntity.created(uri).build();
 	}
-	
-	@RequestMapping(value = "/", method = PUT)
-	public ResponseEntity<?> update(@Valid @RequestBody UrlUpdateDTO urlDto) {
-		
+
+	@RequestMapping(value = "/{code}", method = PUT)
+	public ResponseEntity<?> update(@Valid @RequestBody UrlUpdateDTO urlDto, @PathVariable String code) {
+		urlDto.setCode(code);
 		Url url = service.fromUpdateDTO(urlDto);
+
 		url = service.update(url);
-		
-		return ResponseEntity.ok().body(url);
+
+		return ResponseEntity.noContent().build();
 	}
-	
+
 	@RequestMapping(value = "/{code}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> delete(@PathVariable String code) {
-		
+
 		service.remove(code);
-		
-		return ResponseEntity.ok().build();
+
+		return ResponseEntity.noContent().build();
 	}
 }

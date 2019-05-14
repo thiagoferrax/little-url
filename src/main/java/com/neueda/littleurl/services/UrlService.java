@@ -34,38 +34,40 @@ public class UrlService {
 		Url url;
 		try {
 			url = find(code);
-			
+
 			if (!url.getLongUrl().equals(longUrl)) {
 				url = recursiveInsert(longUrl, startIndex + 1, endIndex + 1);
-			}			
+			}
 		} catch (UrlNotFoundException e) {
 			url = repository.save(new Url(code, longUrl));
-		}		
+		}
 
 		return url;
 	}
 
 	public Url findOrCreate(Url url) {
 		String longUrl = url.getLongUrl();
-		
+
 		int startIndex = 0;
 		int endIndex = startIndex + URL_CODE_SIZE - 1;
 
 		return recursiveInsert(longUrl, startIndex, endIndex);
 	}
-	
+
 	public Url update(Url url) {
+		find(url.getCode());
 		return repository.save(url);
 	}
 
 	public void remove(String code) {
+		find(code);
 		repository.deleteById(code);
 	}
-	
+
 	public Url fromDTO(UrlDTO urlDto) {
 		return new Url(urlDto.getCode(), urlDto.getLongUrl());
 	}
-	
+
 	public Url fromUpdateDTO(@Valid UrlUpdateDTO urlDto) {
 		return new Url(urlDto.getCode(), urlDto.getLongUrl());
 	}

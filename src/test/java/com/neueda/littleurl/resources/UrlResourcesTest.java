@@ -12,7 +12,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.neueda.littleurl.domain.Url;
 import com.neueda.littleurl.dto.UrlDTO;
@@ -159,7 +157,7 @@ public class UrlResourcesTest {
 	}
 
 	@Test
-	public void whenUpdatingAnUrlReturnsStatusOk() throws Exception {
+	public void whenUpdatingAnUrlReturnsStatusNoContent() throws Exception {
 		// Given
 		String updatingLongUrl = "http://www.neueda.com/";
 		String existingCode = "3077yW";
@@ -172,16 +170,17 @@ public class UrlResourcesTest {
 		String inputJson = "{\"code\":\"3077yW\", \"longUrl\":\"http://www.neueda.com\"}";
 
 		// When and Then
-		this.mockMvc.perform(put("/urls/").contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
-				.andExpect(status().isOk());
+		this.mockMvc
+				.perform(put("/urls/" + existingCode).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
+				.andExpect(status().isNoContent());
 	}
 
 	@Test
-	public void whenRemovingAnUrlReturnsStatusOk() throws Exception {
+	public void whenRemovingAnUrlReturnsStatusNoContent() throws Exception {
 		// Given
 		String existingCode = "3077yW";
 
 		// When and Then
-		this.mockMvc.perform(delete("/urls/" + existingCode)).andExpect(status().isOk());
+		this.mockMvc.perform(delete("/urls/" + existingCode)).andExpect(status().isNoContent());
 	}
 }
