@@ -79,7 +79,7 @@ There are still some important requirements that will guide the next steps of th
 ```
 #### Overview
 
-![littleurl](https://user-images.githubusercontent.com/43149895/57697158-fa341f00-7628-11e9-83da-a73bda77c98d.png)
+![littleurl](https://user-images.githubusercontent.com/43149895/57698153-5009c680-762b-11e9-930b-86a55b7a2435.png)
 
 ## Install
 #### Download the repository
