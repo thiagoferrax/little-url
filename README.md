@@ -22,14 +22,61 @@ There are still some important requirements that will guide the next steps of th
 * Design and Implement an authentication service
 * Design and Implement a caching to improve API performance
 
-## Tech stack
+## Architecture overview
 
+##### Tech stack
 * [Spring Boot](http://spring.io/projects/spring-boot) for creating the RESTful Web Services
 * [MockMVC](https://spring.io/guides/gs/testing-web/) for testing the Web Layer
 * [Mockito](https://site.mockito.org/) for testing the Services Layer
 * [Postgres](https://www.postgresql.org/) as database
 * [Maven](https://maven.apache.org/) for managing the project's build
 * [Docker](https://www.docker.com/) for building and managing the application distribution using containers 
+
+##### Project structure
+```
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── neueda
+│   │   │           └── littleurl
+│   │   │               ├── domain
+│   │   │               │   └── Url.java
+│   │   │               ├── dto
+│   │   │               │   ├── UrlDTO.java
+│   │   │               │   └── UrlUpdateDTO.java
+│   │   │               ├── helpers
+│   │   │               │   └── UrlShortnerHelper.java
+│   │   │               ├── repositories
+│   │   │               │   └── UrlRepository.java
+│   │   │               ├── resources
+│   │   │               │   └── UrlResources.java
+│   │   │               ├── services
+│   │   │               │   ├── exceptions
+│   │   │               │   │   └── UrlNotFoundException.java
+│   │   │               │   └── UrlService.java
+│   │   │               └── util
+│   │   │                   └── Constants.java
+│   │   └── resources
+│   │       └── application.properties
+│   └── test
+│       └── java
+│           └── com
+│               └── neueda
+│                   └── littleurl
+│                       ├── helpers
+│                       │   └── UrlShortnerHelperTest.java
+│                       ├── resources
+│                       │   └── UrlResourcesTest.java
+│                       ├── services
+│                       │   └── UrlServiceTest.java
+│                       └── LittleUrlApplicationTests.java
+├── docker-compose.yml
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+└── README.md
+```
 
 ## Install
 ##### Download the repository
