@@ -15,7 +15,7 @@ The main requirements that guided the design and implementation of LittleUrl:
 *	It should be readable, maintainable, and extensible where appropriate
 *	The implementation should preferably be in Java
 
-## Next steps
+#### Next steps
 
 There are still some important requirements that will guide the next steps of this API implementation:
 * Design and implement an API for gathering different statistics
