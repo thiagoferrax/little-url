@@ -18,9 +18,9 @@ The main requirements that guided the design and implementation of LittleUrl:
 #### Next steps
 
 There are still some important requirements that will guide the next steps of this API implementation:
-* Design and implement an API for gathering different statistics
-* Design and Implement an authentication service
-* Design and Implement a caching to improve API performance
+* Add an API for gathering different statistics
+* Implement an authentication service
+* Implement a cache to improve API performance
 
 ## Architecture overview
 
