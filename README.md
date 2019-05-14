@@ -24,7 +24,7 @@ There are still some important requirements that will guide the next steps of th
 
 ## Architecture overview
 
-##### Tech stack
+#### Tech stack
 * [Spring Boot](http://spring.io/projects/spring-boot) for creating the RESTful Web Services
 * [MockMVC](https://spring.io/guides/gs/testing-web/) for testing the Web Layer
 * [Mockito](https://site.mockito.org/) for testing the Services Layer
@@ -32,7 +32,7 @@ There are still some important requirements that will guide the next steps of th
 * [Maven](https://maven.apache.org/) for managing the project's build
 * [Docker](https://www.docker.com/) for building and managing the application distribution using containers 
 
-##### Project structure
+#### Project structure
 ```
 ├── src
 │   ├── main
@@ -77,13 +77,16 @@ There are still some important requirements that will guide the next steps of th
 ├── pom.xml
 └── README.md
 ```
+#### Overview
+
+![littleurl](https://user-images.githubusercontent.com/43149895/57697158-fa341f00-7628-11e9-83da-a73bda77c98d.png)
 
 ## Install
-##### Download the repository
+#### Download the repository
 ```sh
 $ git clone https://github.com/thiagoferrax/little-url.git
 ```
-##### With docker and docker-compose installed
+#### With docker and docker-compose installed
 ```sh
 $ cd little-url && docker-compose up
 ```
