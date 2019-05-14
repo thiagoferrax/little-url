@@ -11,17 +11,17 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
 public class UrlDTO implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private String code;
-	
+
 	@NotNull
 	@NotEmpty
 	@URL
-	@Length(max=MAX_LONG_URL_SIZE)
+	@Length(max = MAX_LONG_URL_SIZE)
 	private String longUrl;
-	
+
 	public UrlDTO() {
 	}
 
@@ -76,6 +76,11 @@ public class UrlDTO implements Serializable {
 		} else if (!longUrl.equals(other.longUrl))
 			return false;
 		return true;
-	}	
-	
+	}
+
+	@Override
+	public String toString() {
+		return "UrlDTO [code=" + code + ", longUrl=" + longUrl + "]";
+	}
+
 }
