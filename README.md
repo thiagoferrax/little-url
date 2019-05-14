@@ -23,13 +23,13 @@ The main requirements that guided the design and implementation of LittleUrl wer
 * [Docker](https://www.docker.com/)
 
 ## Install
-### Download the repository
+#### Download the repository
 ```sh
 $ git clone https://github.com/thiagoferrax/little-url.git
 ```
-### With docker and docker-compose installed
+#### With docker and docker-compose installed
 ```sh
-$ docker-compose up
+$ cd little-url && docker-compose up
 ```
 
 ## License
