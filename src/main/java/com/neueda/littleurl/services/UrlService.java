@@ -55,7 +55,8 @@ public class UrlService {
 	}
 
 	public Url update(Url url) {
-		find(url.getCode());
+		Url foundUrl = find(url.getCode());
+		url.setCreatedAt(foundUrl.getCreatedAt());
 		return repository.save(url);
 	}
 

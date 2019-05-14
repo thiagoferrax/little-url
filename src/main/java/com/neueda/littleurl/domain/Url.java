@@ -9,7 +9,11 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 public class Url implements Serializable {
@@ -22,10 +26,14 @@ public class Url implements Serializable {
 	@Column(length = MAX_LONG_URL_SIZE)  
 	private String longUrl;
 	
-	private Date created = new Date();
-	private Date updated = new Date();
+	@CreationTimestamp
+	private Date createdAt;
+	
+	@UpdateTimestamp
+	private Date updatedAt;
 		
 	public Url() {
+		
 	}
 	
 	public Url(String code, String longUrl) {
@@ -33,6 +41,17 @@ public class Url implements Serializable {
 		this.code = code;
 		this.longUrl = longUrl;
 	}
+	
+	@PrePersist
+    protected void prePersist() {
+        if (this.createdAt == null) createdAt = new Date();
+        if (this.updatedAt == null) updatedAt = new Date();
+    }
+
+    @PreUpdate
+    protected void preUpdate() {
+        this.updatedAt = new Date();
+    }
 
 	public String getCode() {
 		return code;
@@ -48,18 +67,23 @@ public class Url implements Serializable {
 
 	public void setLongUrl(String longUrl) {
 		this.longUrl = longUrl;
-	}	
-	
-	public Date getCreated() {
-		return created;
+	}		
+
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-	public Date getUpdated() {
-		return updated;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
-	@PreUpdate
-	public void setLastUpdate() {  this.updated = new Date(); }
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 
 	@Override
 	public int hashCode() {
@@ -94,7 +118,8 @@ public class Url implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Url [code=" + code + ", longUrl=" + longUrl + ", created=" + created + ", updated=" + updated + "]";
+		return "Url [code=" + code + ", longUrl=" + longUrl + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+				+ "]";
 	}
-
+	
 }
