@@ -4,10 +4,12 @@ import static com.neueda.littleurl.util.Constants.MAX_LONG_URL_SIZE;
 import static com.neueda.littleurl.util.Constants.URL_CODE_SIZE;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.PreUpdate;
 
 @Entity
 public class Url implements Serializable {
@@ -20,6 +22,9 @@ public class Url implements Serializable {
 	@Column(length = MAX_LONG_URL_SIZE)  
 	private String longUrl;
 	
+	private Date created = new Date();
+	private Date updated = new Date();
+		
 	public Url() {
 	}
 	
@@ -43,7 +48,18 @@ public class Url implements Serializable {
 
 	public void setLongUrl(String longUrl) {
 		this.longUrl = longUrl;
+	}	
+	
+	public Date getCreated() {
+		return created;
 	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+
+	@PreUpdate
+	public void setLastUpdate() {  this.updated = new Date(); }
 
 	@Override
 	public int hashCode() {
@@ -78,7 +94,7 @@ public class Url implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Url [code=" + code + ", longUrl=" + longUrl + "]";
+		return "Url [code=" + code + ", longUrl=" + longUrl + ", created=" + created + ", updated=" + updated + "]";
 	}
-	
+
 }
