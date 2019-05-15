@@ -26,6 +26,7 @@ import com.neueda.littleurl.domain.Url;
 import com.neueda.littleurl.dto.UrlDTO;
 import com.neueda.littleurl.dto.UrlUpdateDTO;
 import com.neueda.littleurl.helpers.UrlShortnerHelper;
+import com.neueda.littleurl.services.StatisticService;
 import com.neueda.littleurl.services.UrlService;
 import com.neueda.littleurl.services.exceptions.UrlNotFoundException;
 
@@ -36,6 +37,9 @@ public class UrlResourcesTest {
 	@Autowired
 	private MockMvc mockMvc;
 
+	@MockBean
+	private StatisticService statisticService;
+	
 	@MockBean
 	private UrlService urlService;
 

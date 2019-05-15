@@ -1,6 +1,7 @@
 package com.neueda.littleurl.resources;
 
 import java.net.URI;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -12,14 +13,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.neueda.littleurl.domain.Statistic;
 import com.neueda.littleurl.domain.Url;
 import com.neueda.littleurl.dto.UrlDTO;
 import com.neueda.littleurl.dto.UrlUpdateDTO;
+import com.neueda.littleurl.services.StatisticService;
 import com.neueda.littleurl.services.UrlService;
 import com.neueda.littleurl.services.exceptions.UrlNotFoundException;
 import com.neueda.littleurl.util.Constants;
@@ -31,9 +35,12 @@ public class UrlResources {
 
 	@Autowired
 	private UrlService service;
+	
+	@Autowired
+	private StatisticService statisticService;
 
 	@RequestMapping(value = "/{code}", method = RequestMethod.GET)
-	public ResponseEntity<?> findAndRedirect(@PathVariable String code) {
+	public ResponseEntity<?> findAndRedirect(@PathVariable String code, @RequestHeader Map<String, String> headersMap) {
 		logger.info(Constants.FINDING_URL_FOR_REDIRECTING + code);
 
 		ResponseEntity<?> responseEntity;
@@ -41,6 +48,9 @@ public class UrlResources {
 		try {
 			Url url = service.find(code);
 
+			Statistic statistic = statisticService.mapFrom(headersMap, url);			
+			statisticService.create(statistic);
+			
 			HttpHeaders headers = new HttpHeaders();
 			headers.setLocation(URI.create(url.getLongUrl()));
 			responseEntity = new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
