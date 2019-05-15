@@ -97,7 +97,7 @@ Request Method | URI | Form-data keys | Description |
 GET | http://localhost/urls | - | Get all urls | 
 GET | http://localhost/urls/{code} | - | Find long url and redirect | 
 GET | http://localhost/urls/{code}/longUrl | - | Find and return long url | 
-POST | http://localhost/urls/ | longUrl | Find or create url and return its location | 
+POST | http://localhost/urls/ | longUrl | Find or create url and return its shorten url in response headers | 
 PUT | http://localhost/urls/{code} | code, longUrl | Update url | 
 DELETE | http://localhost/urls/{code} | - | Remove url | 
 
