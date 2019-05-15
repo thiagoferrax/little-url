@@ -17,7 +17,7 @@ The main requirements that guided the design and implementation of LittleUrl:
 
 #### Next steps
 
-There are still some important requirements that will guide the next steps of this API implementation:
+There are still other requirements that will guide the next steps of this API implementation:
 * Add an API for gathering different statistics
 * Implement an authentication service
 * Implement a cache to improve API performance
@@ -90,6 +90,16 @@ $ git clone https://github.com/thiagoferrax/little-url.git
 ```sh
 $ cd little-url && docker-compose up
 ```
+## Usage
+
+Request Method | URI | Body (form-data keys) | Description |  
+--- | --- | --- | --- |
+GET | http://localhost/urls | - | Get all urls | 
+GET | http://localhost/urls/{code} | - | Find the long url and redirect to it | 
+GET | http://localhost/urls/{code}/longUrl | - | Find long url and return it | 
+POST | http://localhost/urls/ | longUrl | Find or create the url and return its location in the response headers | 
+PUT | http://localhost/urls/{code} | code, longUrl | Update the url | 
+DELETE | http://localhost/urls/{code} | - | Remove the url | 
 
 ## License
 
