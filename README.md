@@ -5,9 +5,9 @@
 
 ## About
 
-LittleUrl is an API for short URL creation.  
+The little-url is an API for short URL creation.  
 
-The main requirements that guided the design and implementation of LittleUrl:
+The main requirements that guided the design and implementation of little-url:
 *	Design and implement an API for short URL creation
 *	Implement forwarding of short URLs to the original ones
 *	There should be some form of persistent storage
@@ -92,14 +92,14 @@ $ cd little-url && docker-compose up
 ```
 ## Usage
 
-Request Method | URI | Body (form-data keys) | Description |  
---- | --- | --- | --- |
+Request Method | URI | Form-data keys | Description |  
+:---: | :--- | :---: | :--- |
 GET | http://localhost/urls | - | Get all urls | 
-GET | http://localhost/urls/{code} | - | Find the long url and redirect to it | 
-GET | http://localhost/urls/{code}/longUrl | - | Find long url and return it | 
-POST | http://localhost/urls/ | longUrl | Find or create the url and return its location in the response headers | 
-PUT | http://localhost/urls/{code} | code, longUrl | Update the url | 
-DELETE | http://localhost/urls/{code} | - | Remove the url | 
+GET | http://localhost/urls/{code} | - | Find long url and redirect | 
+GET | http://localhost/urls/{code}/longUrl | - | Find and return long url | 
+POST | http://localhost/urls/ | longUrl | Find or create url and return its location | 
+PUT | http://localhost/urls/{code} | code, longUrl | Update url | 
+DELETE | http://localhost/urls/{code} | - | Remove url | 
 
 ## License
 
