@@ -4,16 +4,22 @@ import static com.neueda.littleurl.util.Constants.MAX_LONG_URL_SIZE;
 import static com.neueda.littleurl.util.Constants.URL_CODE_SIZE;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Url implements Serializable {
@@ -31,6 +37,9 @@ public class Url implements Serializable {
 	
 	@UpdateTimestamp
 	private Date updatedAt;
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="url")
+	private List<Statistic> statistics = new ArrayList<>();
 		
 	public Url() {
 		
@@ -83,6 +92,14 @@ public class Url implements Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}	
+
+	public List<Statistic> getStatistics() {
+		return statistics;
+	}
+
+	public void setStatistics(List<Statistic> statistics) {
+		this.statistics = statistics;
 	}
 
 	@Override
