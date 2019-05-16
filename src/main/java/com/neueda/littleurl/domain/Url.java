@@ -1,8 +1,5 @@
 package com.neueda.littleurl.domain;
 
-import static com.neueda.littleurl.util.Constants.MAX_LONG_URL_SIZE;
-import static com.neueda.littleurl.util.Constants.URL_CODE_SIZE;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,17 +16,17 @@ import javax.persistence.PreUpdate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.neueda.littleurl.util.Constants;
 
 @Entity
 public class Url implements Serializable {
 	private static final long serialVersionUID = 1L;
 		
 	@Id
-	@Column(length = URL_CODE_SIZE)  
+	@Column(length = Constants.URL_CODE_SIZE)  
 	private String code;
 	
-	@Column(length = MAX_LONG_URL_SIZE)  
+	@Column(length = Constants.MAX_LONG_URL_SIZE)  
 	private String longUrl;
 	
 	@CreationTimestamp

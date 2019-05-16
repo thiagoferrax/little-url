@@ -2,7 +2,6 @@ package com.neueda.littleurl.services;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,10 +16,6 @@ import com.neueda.littleurl.domain.Statistic;
 import com.neueda.littleurl.domain.Url;
 import com.neueda.littleurl.repositories.StatisticRepository;
 
-/**
- * @author thiago
- *
- */
 public class StatisticServiceTest {
 
 	@InjectMocks
