@@ -33,20 +33,23 @@ There are still other requirements that will guide the next steps of this API im
 │   │   │       └── neueda
 │   │   │           └── littleurl
 │   │   │               ├── domain
-│   │   │               │   └── Url.java
+│   │   │               │   ├── Url.java
+│   │   │               │   └── Statistic.java
 │   │   │               ├── dto
 │   │   │               │   ├── UrlDTO.java
 │   │   │               │   └── UrlUpdateDTO.java
 │   │   │               ├── helpers
 │   │   │               │   └── UrlShortnerHelper.java
 │   │   │               ├── repositories
-│   │   │               │   └── UrlRepository.java
+│   │   │               │   ├── UrlRepository.java
+│   │   │               │   └── StatisticRepository.java
 │   │   │               ├── resources
 │   │   │               │   └── UrlResources.java
 │   │   │               ├── services
 │   │   │               │   ├── exceptions
 │   │   │               │   │   └── UrlNotFoundException.java
-│   │   │               │   └── UrlService.java
+│   │   │               │   ├── UrlService.java
+│   │   │               │   └── StatisticService.java
 │   │   │               └── util
 │   │   │                   └── Constants.java
 │   │   └── resources
@@ -61,11 +64,10 @@ There are still other requirements that will guide the next steps of this API im
 │                       ├── resources
 │                       │   └── UrlResourcesTest.java
 │                       ├── services
-│                       │   └── UrlServiceTest.java
+│                       │   ├── UrlServiceTest.java
+│                       │   └── StatisticServiceTest.java
 │                       └── LittleUrlApplicationTests.java
 ├── docker-compose.yml
-├── mvnw
-├── mvnw.cmd
 ├── pom.xml
 └── README.md
 ```
