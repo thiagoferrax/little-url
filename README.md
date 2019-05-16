@@ -102,8 +102,8 @@ GET | http://localhost/urls/{code}/longUrl | - | Find and return long url |
 GET | http://localhost/urls/{code}/longUrl | - | Find and return long url | 
 GET | http://localhost/statistics | - | Get all statistics |
 GET | http://localhost/urls/{code}/statistics | - | Get the statistics for an specific url code |
-POST | http://localhost/urls/ | {"longUrl":"[LONG_URL]"} | Find or create url and return its shorten url in response headers | 
-PUT | http://localhost/urls/{code} | {"code": "[CODE]", "longUrl":"[LONG_URL]"} | Update url | 
+POST | http://localhost/urls/ | {"longUrl":"[http...]"} | Find or create url and return its shorten url in response headers | 
+PUT | http://localhost/urls/{code} | {"code": "[code]", "longUrl":"[http...]"} | Update url | 
 DELETE | http://localhost/urls/{code} | - | Remove url | 
 
 ## License
