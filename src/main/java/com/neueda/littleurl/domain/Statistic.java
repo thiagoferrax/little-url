@@ -1,6 +1,7 @@
 package com.neueda.littleurl.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Statistic implements Serializable {
@@ -18,14 +23,16 @@ public class Statistic implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String referer;
-
 	private String browser;
 
-	private String country;
+	private String deviceType;
 
-	private String platform;
+	private String operatingSystem;
 
+	@CreationTimestamp
+	private Date createdAt;
+
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "code", nullable = false)
 	private Url url;
@@ -33,13 +40,11 @@ public class Statistic implements Serializable {
 	public Statistic() {
 	}
 
-	public Statistic(Long id, String referer, String browser, String country, String platform, Url url) {
+	public Statistic(String browser, String deviceType, String operatingSystem, Url url) {
 		super();
-		this.id = id;
-		this.referer = referer;
 		this.browser = browser;
-		this.country = country;
-		this.platform = platform;
+		this.deviceType = deviceType;
+		this.operatingSystem = operatingSystem;
 		this.url = url;
 	}
 
@@ -51,14 +56,6 @@ public class Statistic implements Serializable {
 		this.id = id;
 	}
 
-	public String getReferer() {
-		return referer;
-	}
-
-	public void setReferer(String referer) {
-		this.referer = referer;
-	}
-
 	public String getBrowser() {
 		return browser;
 	}
@@ -67,20 +64,28 @@ public class Statistic implements Serializable {
 		this.browser = browser;
 	}
 
-	public String getCountry() {
-		return country;
+	public String getDeviceType() {
+		return deviceType;
 	}
 
-	public void setCountry(String country) {
-		this.country = country;
+	public void setDeviceType(String deviceType) {
+		this.deviceType = deviceType;
 	}
 
-	public String getPlatform() {
-		return platform;
+	public String getOperatingSystem() {
+		return operatingSystem;
 	}
 
-	public void setPlatform(String platform) {
-		this.platform = platform;
+	public void setOperatingSystem(String operatingSystem) {
+		this.operatingSystem = operatingSystem;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	public Url getUrl() {

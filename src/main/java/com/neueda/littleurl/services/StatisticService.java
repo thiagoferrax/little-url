@@ -12,6 +12,8 @@ import com.neueda.littleurl.domain.Statistic;
 import com.neueda.littleurl.domain.Url;
 import com.neueda.littleurl.repositories.StatisticRepository;
 
+import eu.bitwalker.useragentutils.UserAgent;
+
 @Service
 public class StatisticService {
 	
@@ -27,12 +29,16 @@ public class StatisticService {
 	
 	public Statistic mapFrom(Map<String, String> headers, Url url) {
 		
-		headers.forEach((key, value) -> {
-			logger.info(String.format("Header '%s' = %s", key, value));
-	    });
-		
+		UserAgent agent = UserAgent.parseUserAgentString(headers.get(HttpHeaders.USER_AGENT.toLowerCase()));
+		String deviceType = agent.getOperatingSystem().getDeviceType().getName();
+		String browser = agent.getBrowser().getName();
+		String operatingSystem = agent.getOperatingSystem().getName();
+
 		Statistic statistic = new Statistic();
-		statistic.setReferer(headers.get(HttpHeaders.REFERER.toLowerCase()));
+		statistic.setDeviceType(deviceType);
+		statistic.setOperatingSystem(operatingSystem);
+		statistic.setBrowser(browser);
+		statistic.setUrl(url);
 		
 		return statistic;
 	}

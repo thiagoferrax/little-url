@@ -19,6 +19,8 @@ import javax.persistence.PreUpdate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Url implements Serializable {
 	private static final long serialVersionUID = 1L;
