@@ -1,5 +1,7 @@
 package com.neueda.littleurl.util;
 
+import com.neueda.littleurl.domain.Statistic;
+
 public class Constants {
 	// GeneralO
 	public static final int URL_CODE_SIZE = 6;
@@ -20,4 +22,8 @@ public class Constants {
 	public static final String RECURSIVE_INSERT = "Recursive inserting, long url: ";
 	public static final String FOUND_DIFFERENT_URLS_FOR_SAME_CODE = "Found different long urls for same code: ";
 	public static final String URL_NOT_FOUND_CREATING_NEW_ONE = "Url not found, then creating a new one, code: ";
+	
+	// StatisticService
+	public static final String CREATING_A_STATISTIC = "Creating a statistic: ";
+	public static final String MAPPING_STATISTIC_FROM_HEADERS = "Mapping statistic from headers: ";
 }

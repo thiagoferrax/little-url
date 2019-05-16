@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.neueda.littleurl.domain.Statistic;
 import com.neueda.littleurl.domain.Url;
 import com.neueda.littleurl.repositories.StatisticRepository;
+import com.neueda.littleurl.util.Constants;
 
 import eu.bitwalker.useragentutils.UserAgent;
 
@@ -23,22 +24,24 @@ public class StatisticService {
 	private StatisticRepository repository;
 
 	public Statistic create(Statistic statistic) {
+		logger.info(Constants.CREATING_A_STATISTIC + statistic);
+		
 		statistic.setId(null);
 		return repository.save(statistic);		
 	}
 	
 	public Statistic mapFrom(Map<String, String> headers, Url url) {
+
+		String userAgentString = headers.get(HttpHeaders.USER_AGENT.toLowerCase());
 		
-		UserAgent agent = UserAgent.parseUserAgentString(headers.get(HttpHeaders.USER_AGENT.toLowerCase()));
+		logger.info(Constants.MAPPING_STATISTIC_FROM_HEADERS + userAgentString);
+
+		UserAgent agent = UserAgent.parseUserAgentString(userAgentString);
 		String deviceType = agent.getOperatingSystem().getDeviceType().getName();
 		String browser = agent.getBrowser().getName();
 		String operatingSystem = agent.getOperatingSystem().getName();
 
-		Statistic statistic = new Statistic();
-		statistic.setDeviceType(deviceType);
-		statistic.setOperatingSystem(operatingSystem);
-		statistic.setBrowser(browser);
-		statistic.setUrl(url);
+		Statistic statistic = new Statistic(browser, deviceType, operatingSystem, url);
 		
 		return statistic;
 	}

@@ -121,4 +121,10 @@ public class Statistic implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Statistic [browser=" + browser + ", deviceType=" + deviceType + ", operatingSystem=" + operatingSystem
+				+ ", createdAt=" + createdAt + ", url=" + url + "]";
+	}	
+
 }
