@@ -99,7 +99,6 @@ Request Method | URI | Body (JSON) | Description |
 GET | http://localhost/urls | - | Get all urls | 
 GET | http://localhost/urls/{code} | - | Find long url and redirect | 
 GET | http://localhost/urls/{code}/longUrl | - | Find and return long url | 
-GET | http://localhost/urls/{code}/longUrl | - | Find and return long url | 
 GET | http://localhost/statistics | - | Get all statistics |
 GET | http://localhost/urls/{code}/statistics | - | Get the statistics for an specific url code |
 POST | http://localhost/urls/ | {"longUrl":"[http...]"} | Find or create url and return its shorten url in response headers | 
