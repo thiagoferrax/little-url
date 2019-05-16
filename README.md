@@ -72,7 +72,7 @@ There are still other requirements that will guide the next steps of this API im
 ```
 #### Overview picture
 
-![littleurl](https://user-images.githubusercontent.com/43149895/57871922-e6cbb400-77e0-11e9-9e16-a9b0b4844877.png)
+![littleurl](https://user-images.githubusercontent.com/43149895/57876097-e2a49400-77ea-11e9-9b97-acf7c3c4070e.png)
 
 #### Tech stack
 * [Spring Boot](http://spring.io/projects/spring-boot) for creating the RESTful Web Services
