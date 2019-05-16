@@ -10,6 +10,7 @@ The little-url is an API for short URL creation.
 The main requirements that guided the design and implementation of little-url:
 *	Design and implement an API for short URL creation
 *	Implement forwarding of short URLs to the original ones
+*	Add an API for gathering different statistics
 *	There should be some form of persistent storage
 *	The application should be distributed as one or more Docker images
 *	It should be readable, maintainable, and extensible where appropriate
@@ -18,8 +19,7 @@ The main requirements that guided the design and implementation of little-url:
 #### Next steps
 
 There are still other requirements that will guide the next steps of this API implementation:
-* Add an API for gathering different statistics
-* Implement an authentication service
+* Implement authentication and authorization services
 * Implement a cache to improve API performance
 
 ## Architecture overview
@@ -92,13 +92,16 @@ $ cd little-url && docker-compose up
 ```
 ## Usage
 
-Request Method | URI | Form-data keys | Description |  
+Request Method | URI | Body (JSON) | Description |  
 :---: | :--- | :---: | :--- |
 GET | http://localhost/urls | - | Get all urls | 
 GET | http://localhost/urls/{code} | - | Find long url and redirect | 
 GET | http://localhost/urls/{code}/longUrl | - | Find and return long url | 
-POST | http://localhost/urls/ | longUrl | Find or create url and return its shorten url in response headers | 
-PUT | http://localhost/urls/{code} | code, longUrl | Update url | 
+GET | http://localhost/urls/{code}/longUrl | - | Find and return long url | 
+GET | http://localhost/statistics | - | Get all statistics |
+GET | http://localhost/urls/{code}/statistics | - | Get the statistics for an specific url code |
+POST | http://localhost/urls/ | {"longUrl":"[LONG_URL]"} | Find or create url and return its shorten url in response headers | 
+PUT | http://localhost/urls/{code} | {"code": "[CODE]", "longUrl":"[LONG_URL]"} | Update url | 
 DELETE | http://localhost/urls/{code} | - | Remove url | 
 
 ## License
