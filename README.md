@@ -63,10 +63,9 @@ There are still other requirements that will guide the next steps of this API im
 │                       │   └── UrlShortnerHelperTest.java
 │                       ├── resources
 │                       │   └── UrlResourcesTest.java
-│                       ├── services
-│                       │   ├── UrlServiceTest.java
-│                       │   └── StatisticServiceTest.java
-│                       └── LittleUrlApplicationTests.java
+│                       └── services
+│                           ├── UrlServiceTest.java
+│                           └── StatisticServiceTest.java              
 ├── docker-compose.yml
 ├── pom.xml
 └── README.md
