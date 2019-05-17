@@ -65,7 +65,8 @@ There are still other requirements that will guide the next steps of this API im
 │                       │   └── UrlResourcesTest.java
 │                       └── services
 │                           ├── UrlServiceTest.java
-│                           └── StatisticServiceTest.java              
+│                           ├── StatisticServiceTest.java
+│                           └── StatisticServiceParameterizedTest.java
 ├── docker-compose.yml
 ├── pom.xml
 └── README.md
@@ -99,9 +100,9 @@ GET | http://localhost/urls | - | Get all urls |
 GET | http://localhost/urls/{code} | - | Find long url and redirect | 
 GET | http://localhost/urls/{code}/longUrl | - | Find and return long url | 
 GET | http://localhost/statistics | - | Get all statistics |
-GET | http://localhost/urls/{code}/statistics | - | Get the statistics for an specific url code |
-POST | http://localhost/urls/ | {"longUrl":"[http...]"} | Find or create url and return its shorten url in response headers | 
-PUT | http://localhost/urls/{code} | {"code": "[code]", "longUrl":"[http...]"} | Update url | 
+GET | http://localhost/urls/{code}/statistics | - | Get the statistics for a specific url code |
+POST | http://localhost/urls/ | { "longUrl": "[http...]" } | Find or create url and return its shorten url in response headers | 
+PUT | http://localhost/urls/{code} | { "code": "[code]", "longUrl": "[http...]" } | Update url | 
 DELETE | http://localhost/urls/{code} | - | Remove url | 
 
 ## License
