@@ -8,7 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.neueda.littleurl.dto.StatisticsDTO;
 import com.neueda.littleurl.dto.StatisticsSummaryDTO;
 import com.neueda.littleurl.services.StatisticService;
+import com.neueda.littleurl.services.UrlService;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
@@ -31,8 +31,10 @@ public class StatisticResourcesTest {
 	@MockBean
 	private StatisticService statisticService;
 
+	@MockBean
+	private UrlService urlService;
+
 	@Test
-	@Ignore
 	public void whenGettingStatisticsReturnsTheExistingOnes() throws Exception {
 		// Given
 		Long numberOfHits = 3L;
@@ -53,11 +55,10 @@ public class StatisticResourcesTest {
 
 		// When and Then
 		this.mockMvc.perform(get("/statistics/summary")).andExpect(status().isOk()).andExpect(content().json(
-				"{'numberOfHits': '3','browsers': [{'name':'Firefox', 'total': '1'}. {'name':'Chrome', 'total': '2'}]}, 'deviceTypes': [{'name':'Computer', 'total':'3'}], 'operatingSystems':[{'name':'Linux', 'total':'3'}]"));
+				"{'numberOfHits':3,'browsers':[{'name':'Firefox','total':1},{'name':'Chrome','total':2}],'devicesTypes':[{'name':'Computer','total':3}],'operatingSystems':[{'name':'Linux','total':3}]}"));
 	}
-	
+
 	@Test
-	@Ignore
 	public void whenGettingStatisticsByCodeReturnsTheExistingOnes() throws Exception {
 		// Given
 		String code = "3077yW";
@@ -78,7 +79,7 @@ public class StatisticResourcesTest {
 		given(statisticService.getStatisticsSummaryByCode(code)).willReturn(statisticsSummary);
 
 		// When and Then
-		this.mockMvc.perform(get("/statistics/summary/"+code)).andExpect(status().isOk()).andExpect(content().json(
-				"{'numberOfHits': '3','browsers': [{'name':'Firefox', 'total': '1'}. {'name':'Chrome', 'total': '2'}]}, 'deviceTypes': [{'name':'Computer', 'total':'3'}], 'operatingSystems':[{'name':'Linux', 'total':'3'}]"));
+		this.mockMvc.perform(get("/statistics/summary/" + code)).andExpect(status().isOk()).andExpect(content().json(
+				"{'numberOfHits':3,'browsers':[{'name':'Firefox','total':1},{'name':'Chrome','total':2}],'devicesTypes':[{'name':'Computer','total':3}],'operatingSystems':[{'name':'Linux','total':3}]}"));
 	}
 }
