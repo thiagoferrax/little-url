@@ -41,7 +41,9 @@ There are still other requirements that will guide the next steps of this API im
 │   │   │               │   ├── StatisticsDTO.java
 │   │   │               │   └── StatisticsSummaryDTO.java
 │   │   │               ├── helpers
-│   │   │               │   └── UrlShortnerHelper.java
+│   │   │               │   ├── UrlShortnerHelper.java
+│   │   │               │   └── exceptions
+│   │   │               │       └── UrlShortnerHelperException.java
 │   │   │               ├── repositories
 │   │   │               │   ├── UrlRepository.java
 │   │   │               │   └── StatisticRepository.java
