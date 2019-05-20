@@ -23,6 +23,10 @@ public class Constants {
 	public static final String FOUND_DIFFERENT_URLS_FOR_SAME_CODE = "Found different long urls for same code: ";
 	public static final String URL_NOT_FOUND_CREATING_NEW_ONE = "Url not found, then creating a new one, code: ";
 	
+	// StatisticResources
+	public static final String GETTING_STATISTICS_SUMMARY = "Getting statistics summary.";
+	public static final String GETTING_STATISTICS_SUMMARY_BY_CODE = "Getting statistics summary by code: ";
+
 	// StatisticService
 	public static final String CREATING_A_STATISTIC = "Creating a statistic: ";
 	public static final String MAPPING_STATISTIC_FROM_HEADERS = "Mapping statistic from headers: ";

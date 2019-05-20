@@ -1,6 +1,8 @@
 package com.neueda.littleurl.services;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -14,6 +16,8 @@ import org.springframework.http.HttpHeaders;
 
 import com.neueda.littleurl.domain.Statistic;
 import com.neueda.littleurl.domain.Url;
+import com.neueda.littleurl.dto.StatisticsDTO;
+import com.neueda.littleurl.dto.StatisticsSummaryDTO;
 import com.neueda.littleurl.repositories.StatisticRepository;
 
 public class StatisticServiceTest {
@@ -59,6 +63,75 @@ public class StatisticServiceTest {
 		Assert.assertEquals("Computer", statistic.getDeviceType());
 		Assert.assertEquals("Windows XP", statistic.getOperatingSystem());
 		Assert.assertEquals(url, statistic.getUrl());
+	}
+	
+	@Test
+	public void whenGettingStatisticsSummaryReturnsResultsFromRepository() {
+		Long numberOfHits = 3L;
+		
+		StatisticsDTO firefox = new StatisticsDTO("Firefox", 1L);
+		StatisticsDTO chrome = new StatisticsDTO("Chrome", 2L);
+		List<StatisticsDTO> browsers = Arrays.asList(new StatisticsDTO[] { firefox, chrome});
+
+		StatisticsDTO computer = new StatisticsDTO("Computer", 1L);
+		StatisticsDTO mobile = new StatisticsDTO("Mobile", 1L);
+		StatisticsDTO tablet = new StatisticsDTO("Tablet", 1L);
+		List<StatisticsDTO> deviceTypes = Arrays.asList(new StatisticsDTO[] { computer, mobile, tablet});
+
+		Long totalOfLinuxHits = 3L;
+		StatisticsDTO linux = new StatisticsDTO("Linux", totalOfLinuxHits);
+		List<StatisticsDTO> operationSystems = Arrays.asList(new StatisticsDTO[] { linux });
+		
+		// Given
+		Mockito.when(repository.getNumberOfHits()).thenReturn(numberOfHits);
+		Mockito.when(repository.getBrowsers()).thenReturn(browsers);
+		Mockito.when(repository.getDevicesTypes()).thenReturn(deviceTypes);
+		Mockito.when(repository.getOperatingSystems()).thenReturn(operationSystems);
+
+		//When
+		StatisticsSummaryDTO statisticsSummary = service.getStatisticsSummary();
+		
+		//Then
+		Assert.assertEquals(numberOfHits, statisticsSummary.getNumberOfHits());
+		Assert.assertEquals(2, statisticsSummary.getBrowsers().size());
+		Assert.assertEquals(3, statisticsSummary.getDevicesTypes().size());
+		Assert.assertEquals(1, statisticsSummary.getOperatingSystems().size());
+		Assert.assertEquals(totalOfLinuxHits, statisticsSummary.getOperatingSystems().get(0).getTotal());
+	}
+	
+	@Test
+	public void whenGettingStatisticsSummaryByCodeReturnsResultsFromRepository() {
+		String code = "3077yW";
+		Long numberOfHits = 3L;
+		
+		StatisticsDTO firefox = new StatisticsDTO("Firefox", 1L);
+		StatisticsDTO chrome = new StatisticsDTO("Chrome", 2L);
+		List<StatisticsDTO> browsers = Arrays.asList(new StatisticsDTO[] { firefox, chrome});
+
+		StatisticsDTO computer = new StatisticsDTO("Computer", 1L);
+		StatisticsDTO mobile = new StatisticsDTO("Mobile", 1L);
+		StatisticsDTO tablet = new StatisticsDTO("Tablet", 1L);
+		List<StatisticsDTO> deviceTypes = Arrays.asList(new StatisticsDTO[] { computer, mobile, tablet});
+
+		Long totalOfLinuxHits = 3L;
+		StatisticsDTO linux = new StatisticsDTO("Linux", totalOfLinuxHits);
+		List<StatisticsDTO> operationSystems = Arrays.asList(new StatisticsDTO[] { linux });
+		
+		// Given
+		Mockito.when(repository.getNumberOfHitsByCode(code)).thenReturn(numberOfHits);
+		Mockito.when(repository.getBrowsersByCode(code)).thenReturn(browsers);
+		Mockito.when(repository.getDevicesTypesByCode(code)).thenReturn(deviceTypes);
+		Mockito.when(repository.getOperatingSystemsByCode(code)).thenReturn(operationSystems);
+
+		//When
+		StatisticsSummaryDTO statisticsSummary = service.getStatisticsSummaryByCode(code);
+		
+		//Then
+		Assert.assertEquals(numberOfHits, statisticsSummary.getNumberOfHits());
+		Assert.assertEquals(2, statisticsSummary.getBrowsers().size());
+		Assert.assertEquals(3, statisticsSummary.getDevicesTypes().size());
+		Assert.assertEquals(1, statisticsSummary.getOperatingSystems().size());
+		Assert.assertEquals(totalOfLinuxHits, statisticsSummary.getOperatingSystems().get(0).getTotal());
 	}
 
 }

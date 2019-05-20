@@ -1,5 +1,6 @@
 package com.neueda.littleurl.services;
 
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.neueda.littleurl.domain.Statistic;
 import com.neueda.littleurl.domain.Url;
+import com.neueda.littleurl.dto.StatisticsDTO;
+import com.neueda.littleurl.dto.StatisticsSummaryDTO;
 import com.neueda.littleurl.repositories.StatisticRepository;
 import com.neueda.littleurl.util.Constants;
 
@@ -44,5 +47,31 @@ public class StatisticService {
 		Statistic statistic = new Statistic(browser, deviceType, operatingSystem, url);
 		
 		return statistic;
+	}
+
+	public StatisticsSummaryDTO getStatisticsSummary() {
+		logger.info(Constants.GETTING_STATISTICS_SUMMARY);
+
+		Long numberOfHits = repository.getNumberOfHits();
+		List<StatisticsDTO> browsers = repository.getBrowsers();
+		List<StatisticsDTO> devicesTypes = repository.getDevicesTypes();
+		List<StatisticsDTO> operatingSystems = repository.getOperatingSystems();
+
+		StatisticsSummaryDTO summary = new StatisticsSummaryDTO(numberOfHits, browsers, devicesTypes, operatingSystems);
+		
+		return summary;
+	}
+
+	public StatisticsSummaryDTO getStatisticsSummaryByCode(String code) {
+		logger.info(Constants.GETTING_STATISTICS_SUMMARY_BY_CODE + code);
+		
+		Long numberOfHits = repository.getNumberOfHitsByCode(code);
+		List<StatisticsDTO> browsers = repository.getBrowsersByCode(code);
+		List<StatisticsDTO> devicesTypes = repository.getDevicesTypesByCode(code);
+		List<StatisticsDTO> operatingSystems = repository.getOperatingSystemsByCode(code);
+		
+		StatisticsSummaryDTO summary = new StatisticsSummaryDTO(numberOfHits, browsers, devicesTypes, operatingSystems);
+		
+		return summary;
 	}
 }

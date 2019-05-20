@@ -37,14 +37,17 @@ There are still other requirements that will guide the next steps of this API im
 │   │   │               │   └── Statistic.java
 │   │   │               ├── dto
 │   │   │               │   ├── UrlDTO.java
-│   │   │               │   └── UrlUpdateDTO.java
+│   │   │               │   ├── UrlUpdateDTO.java
+│   │   │               │   ├── StatisticsDTO.java
+│   │   │               │   └── StatisticsSummaryDTO.java
 │   │   │               ├── helpers
 │   │   │               │   └── UrlShortnerHelper.java
 │   │   │               ├── repositories
 │   │   │               │   ├── UrlRepository.java
 │   │   │               │   └── StatisticRepository.java
 │   │   │               ├── resources
-│   │   │               │   └── UrlResources.java
+│   │   │               │   ├── UrlResources.java
+│   │   │               │   └── StatisticResources.java
 │   │   │               ├── services
 │   │   │               │   ├── exceptions
 │   │   │               │   │   └── UrlNotFoundException.java
@@ -62,7 +65,8 @@ There are still other requirements that will guide the next steps of this API im
 │                       ├── helpers
 │                       │   └── UrlShortnerHelperTest.java
 │                       ├── resources
-│                       │   └── UrlResourcesTest.java
+│                       │   ├── UrlResourcesTest.java
+│                       │   └── StatisticResourcesTest.java
 │                       └── services
 │                           ├── UrlServiceTest.java
 │                           ├── StatisticServiceTest.java
@@ -101,6 +105,8 @@ GET | http://localhost/urls/{code} | - | Find long url and redirect |
 GET | http://localhost/urls/{code}/longUrl | - | Find and return long url | 
 GET | http://localhost/statistics | - | Get all statistics |
 GET | http://localhost/urls/{code}/statistics | - | Get the statistics for a specific url code |
+GET | http://localhost/statistics/summary | - | Get the statistics summary |
+GET | http://localhost/statistics/summary/{code} | - | Get the statistics summary for a specific url code |
 POST | http://localhost/urls/ | { "longUrl": "[http...]" } | Find or create url and return its shorten url in response headers | 
 PUT | http://localhost/urls/{code} | { "code": "[code]", "longUrl": "[http...]" } | Update url | 
 DELETE | http://localhost/urls/{code} | - | Remove url | 
