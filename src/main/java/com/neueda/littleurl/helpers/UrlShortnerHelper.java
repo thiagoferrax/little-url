@@ -5,6 +5,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
+import com.neueda.littleurl.helpers.exceptions.UrlShortnerHelperException;
+import com.neueda.littleurl.util.Constants;
+
 public class UrlShortnerHelper {
 
 	private UrlShortnerHelper() {
@@ -36,7 +39,7 @@ public class UrlShortnerHelper {
 
 			return hash;
 		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
+			throw new UrlShortnerHelperException(Constants.MD5_ALGORITHM_IS_NOT_AVAILABLE, e);
 		}
 	}
 

@@ -32,4 +32,8 @@ public class Constants {
 	// StatisticService
 	public static final String CREATING_A_STATISTIC = "Creating a statistic: {0}";
 	public static final String MAPPING_STATISTIC_FROM_HEADERS = "Mapping statistic from headers: {0}";
+	
+	// UrlShortnerHelper
+	public static final String MD5_ALGORITHM_IS_NOT_AVAILABLE = "The MD5 algorithm is not available in the environment.";
+
 }
