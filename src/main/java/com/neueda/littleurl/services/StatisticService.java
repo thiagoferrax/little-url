@@ -27,7 +27,7 @@ public class StatisticService {
 	private StatisticRepository repository;
 
 	public Statistic create(Statistic statistic) {
-		logger.info(Constants.CREATING_A_STATISTIC + statistic);
+		logger.info(Constants.CREATING_A_STATISTIC, statistic);
 		
 		statistic.setId(null);
 		return repository.save(statistic);		
@@ -37,16 +37,14 @@ public class StatisticService {
 
 		String userAgentString = headers.get(HttpHeaders.USER_AGENT.toLowerCase());
 		
-		logger.info(Constants.MAPPING_STATISTIC_FROM_HEADERS + userAgentString);
+		logger.info(Constants.MAPPING_STATISTIC_FROM_HEADERS, userAgentString);
 
 		UserAgent agent = UserAgent.parseUserAgentString(userAgentString);
 		String deviceType = agent.getOperatingSystem().getDeviceType().getName();
 		String browser = agent.getBrowser().getName();
 		String operatingSystem = agent.getOperatingSystem().getName();
 
-		Statistic statistic = new Statistic(browser, deviceType, operatingSystem, url);
-		
-		return statistic;
+		return new Statistic(browser, deviceType, operatingSystem, url);
 	}
 
 	public StatisticsSummaryDTO getStatisticsSummary() {
@@ -57,21 +55,17 @@ public class StatisticService {
 		List<StatisticsDTO> devicesTypes = repository.getDevicesTypes();
 		List<StatisticsDTO> operatingSystems = repository.getOperatingSystems();
 
-		StatisticsSummaryDTO summary = new StatisticsSummaryDTO(numberOfHits, browsers, devicesTypes, operatingSystems);
-		
-		return summary;
+		return new StatisticsSummaryDTO(numberOfHits, browsers, devicesTypes, operatingSystems);
 	}
 
 	public StatisticsSummaryDTO getStatisticsSummaryByCode(String code) {
-		logger.info(Constants.GETTING_STATISTICS_SUMMARY_BY_CODE + code);
+		logger.info(Constants.GETTING_STATISTICS_SUMMARY_BY_CODE, code);
 		
 		Long numberOfHits = repository.getNumberOfHitsByCode(code);
 		List<StatisticsDTO> browsers = repository.getBrowsersByCode(code);
 		List<StatisticsDTO> devicesTypes = repository.getDevicesTypesByCode(code);
 		List<StatisticsDTO> operatingSystems = repository.getOperatingSystemsByCode(code);
 		
-		StatisticsSummaryDTO summary = new StatisticsSummaryDTO(numberOfHits, browsers, devicesTypes, operatingSystems);
-		
-		return summary;
+		return new StatisticsSummaryDTO(numberOfHits, browsers, devicesTypes, operatingSystems);
 	}
 }

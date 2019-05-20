@@ -23,6 +23,7 @@ public class UrlDTO implements Serializable {
 	private String longUrl;
 
 	public UrlDTO() {
+		this.longUrl = "";
 	}
 
 	public UrlDTO(String code, @NotNull @NotEmpty @URL @Length(max = 2048) String longUrl) {
@@ -58,23 +59,30 @@ public class UrlDTO implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		UrlDTO other = (UrlDTO) obj;
 		if (code == null) {
-			if (other.code != null)
+			if (other.code != null) {
 				return false;
-		} else if (!code.equals(other.code))
+			}
+		} else if (!code.equals(other.code)) {
 			return false;
+		}
 		if (longUrl == null) {
-			if (other.longUrl != null)
+			if (other.longUrl != null) {
 				return false;
-		} else if (!longUrl.equals(other.longUrl))
+			}
+		} else if (!longUrl.equals(other.longUrl)) {
 			return false;
+		}
 		return true;
 	}
 

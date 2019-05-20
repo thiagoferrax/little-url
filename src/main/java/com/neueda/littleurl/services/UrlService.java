@@ -26,14 +26,14 @@ public class UrlService {
 	private UrlRepository repository;
 
 	public Url find(String code) {
-		logger.info(Constants.FINDING_URL_BY_CODE + code);
+		logger.info(Constants.FINDING_URL_BY_CODE, code);
 		
 		Optional<Url> optional = repository.findById(code);
 		return optional.orElseThrow(() -> new UrlNotFoundException(Constants.URL_NOT_FOUND_FOR_CODE + code));
 	}
 
 	private Url recursiveInsert(String longUrl, int startIndex, int endIndex) {
-		logger.info(Constants.RECURSIVE_INSERT + longUrl);
+		logger.info(Constants.RECURSIVE_INSERT, longUrl);
 
 		String code = UrlShortnerHelper.generateShortURL(longUrl, startIndex, endIndex);
 		
@@ -42,12 +42,12 @@ public class UrlService {
 			url = find(code);
 
 			if (!url.getLongUrl().equals(longUrl)) {
-				logger.info(Constants.FOUND_DIFFERENT_URLS_FOR_SAME_CODE + code);
+				logger.info(Constants.FOUND_DIFFERENT_URLS_FOR_SAME_CODE, code);
 
 				url = recursiveInsert(longUrl, startIndex + 1, endIndex + 1);
 			}
 		} catch (UrlNotFoundException e) {
-			logger.warn(Constants.URL_NOT_FOUND_CREATING_NEW_ONE + code, e);
+			logger.warn(Constants.URL_NOT_FOUND_CREATING_NEW_ONE, code, e);
 
 			url = repository.save(new Url(code, longUrl));
 		}
@@ -58,7 +58,7 @@ public class UrlService {
 	public Url findOrCreate(Url url) {
 		String longUrl = url.getLongUrl();
 
-		logger.info(Constants.FINDING_OR_CREATING_URL + longUrl);
+		logger.info(Constants.FINDING_OR_CREATING_URL, longUrl);
 
 		int startIndex = 0;
 		int endIndex = startIndex + Constants.URL_CODE_SIZE - 1;
@@ -67,7 +67,7 @@ public class UrlService {
 	}
 
 	public Url update(Url url) {
-		logger.info(Constants.UPDATING_URL + url);
+		logger.info(Constants.UPDATING_URL, url);
 
 		Url foundUrl = find(url.getCode());
 		url.setCreatedAt(foundUrl.getCreatedAt());
@@ -76,7 +76,7 @@ public class UrlService {
 	}
 
 	public void remove(String code) {
-		logger.info(Constants.REMOVING_URL + code);
+		logger.info(Constants.REMOVING_URL, code);
 
 		find(code);
 		repository.deleteById(code);
