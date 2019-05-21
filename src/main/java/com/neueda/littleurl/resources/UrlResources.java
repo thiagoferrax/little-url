@@ -48,25 +48,15 @@ public class UrlResources {
 
 		logger.info(Constants.FINDING_URL_FOR_REDIRECTING, code);
 
-		ResponseEntity<Url> responseEntity;
+		Url url = service.find(code);
 
-		try {
-			Url url = service.find(code);
+		Statistic statistic = statisticService.mapFrom(headersMap, url);
+		statisticService.create(statistic);
 
-			Statistic statistic = statisticService.mapFrom(headersMap, url);
-			statisticService.create(statistic);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(URI.create(url.getLongUrl()));
 
-			HttpHeaders headers = new HttpHeaders();
-			headers.setLocation(URI.create(url.getLongUrl()));
-			responseEntity = new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
-
-		} catch (UrlNotFoundException e) {
-			logger.warn(Constants.URL_NOT_FOUND_FOR_REDIRECTING, code, e);
-
-			responseEntity = ResponseEntity.notFound().build();
-		}
-
-		return responseEntity;
+		return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
 	}
 
 	@GetMapping(path = "/{code}/longUrl")
@@ -75,15 +65,8 @@ public class UrlResources {
 
 		ResponseEntity<Url> responseEntity;
 
-		try {
-
-			Url url = service.find(code);
-			responseEntity = ResponseEntity.ok().body(url);
-		} catch (UrlNotFoundException e) {
-			logger.warn(Constants.LONG_URL_NOT_FOUND + code, e);
-
-			responseEntity = ResponseEntity.notFound().build();
-		}
+		Url url = service.find(code);
+		responseEntity = ResponseEntity.ok().body(url);
 
 		return responseEntity;
 	}

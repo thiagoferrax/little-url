@@ -11,9 +11,7 @@ public class Constants {
 
 	// UrlResources
 	public static final String FINDING_URL_FOR_REDIRECTING = "Finding url for redirecting, code: {0}";
-	public static final String URL_NOT_FOUND_FOR_REDIRECTING = "Url not found for redirecting, code: {0}";
 	public static final String FINDING_LONG_URL = "Finding long url, code: {0}";
-	public static final String LONG_URL_NOT_FOUND = "Long url not found, code: {0}";
 	public static final String FINDING_OR_CREATING_URL = "Finding or creating url: {0}";
 	public static final String UPDATING_URL = "Updating url: {0}";
 	public static final String REMOVING_URL = "Removing url, code: {0}";
