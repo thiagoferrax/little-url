@@ -28,7 +28,6 @@ import com.neueda.littleurl.dto.UrlDTO;
 import com.neueda.littleurl.dto.UrlUpdateDTO;
 import com.neueda.littleurl.services.StatisticService;
 import com.neueda.littleurl.services.UrlService;
-import com.neueda.littleurl.services.exceptions.UrlNotFoundException;
 import com.neueda.littleurl.util.Constants;
 
 @RestController
