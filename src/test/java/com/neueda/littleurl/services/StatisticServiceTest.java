@@ -113,9 +113,10 @@ public class StatisticServiceTest {
 		StatisticsDTO tablet = new StatisticsDTO("Tablet", 1L);
 		List<StatisticsDTO> deviceTypes = Arrays.asList(new StatisticsDTO[] { computer, mobile, tablet});
 
-		Long totalOfLinuxHits = 3L;
+		Long totalOfLinuxHits = 2L;
 		StatisticsDTO linux = new StatisticsDTO("Linux", totalOfLinuxHits);
-		List<StatisticsDTO> operationSystems = Arrays.asList(new StatisticsDTO[] { linux });
+		StatisticsDTO windows = new StatisticsDTO("Windows", 1L);
+		List<StatisticsDTO> operationSystems = Arrays.asList(new StatisticsDTO[] { linux, windows });
 		
 		// Given
 		Mockito.when(repository.getNumberOfHitsByCode(code)).thenReturn(numberOfHits);
@@ -130,7 +131,7 @@ public class StatisticServiceTest {
 		Assert.assertEquals(numberOfHits, statisticsSummary.getNumberOfHits());
 		Assert.assertEquals(2, statisticsSummary.getBrowsers().size());
 		Assert.assertEquals(3, statisticsSummary.getDevicesTypes().size());
-		Assert.assertEquals(1, statisticsSummary.getOperatingSystems().size());
+		Assert.assertEquals(2, statisticsSummary.getOperatingSystems().size());
 		Assert.assertEquals(totalOfLinuxHits, statisticsSummary.getOperatingSystems().get(0).getTotal());
 	}
 
