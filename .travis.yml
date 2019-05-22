@@ -1,3 +1,10 @@
 language: java
 jdk: oraclejdk8
 dist: trusty
+addons:
+  sonarcloud:
+    organization: "thiagoferrax-github"
+    token:
+      secure: "Wyk9chSnxjQMwT9FlpW91O0M44gzSuMgk7RpXApe/XbGkQKDXF7p+4TpcU7j2fPajLpzrb1xQuVFSTRRK5juDeqQ3pHJM56MGG0Rz4wimO30uIMBUzQDfgDSG4SxsUFfrnxmxFJ02Lk1r/AA6eY+/W4sSYnJTWYf2rnsqxFRmFPLmROAFWUjee3ED69ULuWklfDoYqipID16dU7nLg2RA45OnTq0lB9YNp+JI8m3EiQttXI3zf3d/gBAf23RmGreRD9gXBn38EL+3shvP55K07ouvdFOc1pIoZGTdgROuz6AYKWDRftqb4DP/u3VkZSUDhlpSS7tA+BOjTUdUDT5VqhEmk6Z7cT8EUY92GtA1eE7mzdKbrGiS7iqfZgEciLHRXXbah8g+aTPIBSRrvJ5V/KRG2a3vh1q9+/T//fC9+6FPOZCF8lROCeMblHdiEAtHsBq4adZ60R6Wip2DYFdF1BMG7Q5dak/hW0a+Jw1xdKki/NEJjQjAacHhnoyWDqZepM3JK7T2oTnFBkPMcgLQji2/Brdt6/aAzmJZQhpT5kavoxH9/64ZX9a8OCm7oUlw4UpZtT18cbBt2X9bwpq78pjWaiAW058kMXia2sf0y8muBR74/geAyQQfi61qaxR/bGT7t9rRLm4rxEWj5ANt8tEzbJth6Mdrhns2otynFQ="
+script:
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
