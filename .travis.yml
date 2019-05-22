@@ -1,11 +1,21 @@
 language: java
-jdk: oraclejdk8
-dist: trusty
+sudo: false
+install: true
+
 addons:
   sonarcloud:
-    organization: "thiagoferrax-github" # the key of the org you chose at step #3
+    organization: "thiagoferrax-github"
     token:
-      secure: "hvtmmyHEi3sOGtAuwMm4sAPYHqi7F5Cf3I+U+DKWCL6A3AlFBLWRALhhyL8empkos32+xqp7mixUQcm/Uap9VuOJY1TZ0gWsAo8ys0XxprIM4OJp7n6Z7DPTiLXV+MN0497jym45IVpZlcSX6Kj/4e+QAd1eYYH7TzIcBs/ERM6sQJ1MJ29sM3iVCxMCiMXjstgqzqy3PMzSFZItZzsaEYuF8pAd3TIgp1JoWFw7wjfGYD2SB5NcLOuMHjEdctbCpz+qC3CSeJw4rLiEDXemTE+cltS+9/yY98caRvf+B4EbpsyidKPwnvcc5OHGfE7Lv6y56XfC3wPnP4SsNqV4X6bWN6n1xeoWX8niRwIRQwcXQzJg86tvuv5tHFDDRVmDlRfKtblx4jcyd8S6Z2I6kFTlhIBMvs+2l8YlQYQpgG73yjnj17QjVQukfWgAlZDHRtHUW7fzhMRZDWSr/PgbLibKLdJDqHZYbmUeDSs9QSKYFyDLPAgucJMW0vbS6S0n6SbRr2LBuOw+BddVzK3x4Euiwv8hSt7TXo78D/Xuj0Oap2WcBNZhgEGkYaf4JpedZBfZTCkkmfrtY1gWVkEhyzUSZ5fyDnzrmHT6bcRKdVEJNGnE1SBOKMYTIJB92Yt/EOzhDZEzOW4MZJxNjUYlFf0puYZPmtSsfgWHBZfLHmo=" # encrypted value of your token
+      secure: "hvtmmyHEi3sOGtAuwMm4sAPYHqi7F5Cf3I+U+DKWCL6A3AlFBLWRALhhyL8empkos32+xqp7mixUQcm/Uap9VuOJY1TZ0gWsAo8ys0XxprIM4OJp7n6Z7DPTiLXV+MN0497jym45IVpZlcSX6Kj/4e+QAd1eYYH7TzIcBs/ERM6sQJ1MJ29sM3iVCxMCiMXjstgqzqy3PMzSFZItZzsaEYuF8pAd3TIgp1JoWFw7wjfGYD2SB5NcLOuMHjEdctbCpz+qC3CSeJw4rLiEDXemTE+cltS+9/yY98caRvf+B4EbpsyidKPwnvcc5OHGfE7Lv6y56XfC3wPnP4SsNqV4X6bWN6n1xeoWX8niRwIRQwcXQzJg86tvuv5tHFDDRVmDlRfKtblx4jcyd8S6Z2I6kFTlhIBMvs+2l8YlQYQpgG73yjnj17QjVQukfWgAlZDHRtHUW7fzhMRZDWSr/PgbLibKLdJDqHZYbmUeDSs9QSKYFyDLPAgucJMW0vbS6S0n6SbRr2LBuOw+BddVzK3x4Euiwv8hSt7TXo78D/Xuj0Oap2WcBNZhgEGkYaf4JpedZBfZTCkkmfrtY1gWVkEhyzUSZ5fyDnzrmHT6bcRKdVEJNGnE1SBOKMYTIJB92Yt/EOzhDZEzOW4MZJxNjUYlFf0puYZPmtSsfgWHBZfLHmo="
+
+jdk:
+  - oraclejdk8
+
 script:
-  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+  # JaCoCo is used to have code coverage, "-Pcoverage" activates the maven profile in the pom.xml
+  - mvn clean verify sonar:sonar -Pcoverage 
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
