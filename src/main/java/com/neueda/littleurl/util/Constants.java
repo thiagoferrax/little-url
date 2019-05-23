@@ -5,9 +5,10 @@ public class Constants {
 		throw new IllegalStateException("Utility class");
 	}
 
-	// GeneralO
+	// General
 	public static final int URL_CODE_SIZE = 6;
 	public static final int MAX_LONG_URL_SIZE = 2048;
+	public static final String PATTERN_BREAKING_CHARACTERS = "[\n|\r|\t]";
 
 	// UrlResources
 	public static final String FINDING_URL_FOR_REDIRECTING = "Finding url for redirecting, code: {0}";
@@ -30,7 +31,7 @@ public class Constants {
 	// StatisticService
 	public static final String CREATING_A_STATISTIC = "Creating a statistic: {0}";
 	public static final String MAPPING_STATISTIC_FROM_HEADERS = "Mapping statistic from headers: {0}";
-	
+
 	// UrlShortnerHelper
 	public static final String MD5_ALGORITHM_IS_NOT_AVAILABLE = "The MD5 algorithm is not available in the environment.";
 

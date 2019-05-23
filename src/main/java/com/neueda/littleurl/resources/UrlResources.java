@@ -45,6 +45,8 @@ public class UrlResources {
 	public ResponseEntity<Url> findAndRedirect(@PathVariable String code,
 			@RequestHeader Map<String, String> headersMap) {
 
+		code = code.replaceAll(Constants.PATTERN_BREAKING_CHARACTERS, "_");
+
 		logger.info(Constants.FINDING_URL_FOR_REDIRECTING, code);
 
 		Url url = service.find(code);
@@ -60,6 +62,9 @@ public class UrlResources {
 
 	@GetMapping(path = "/{code}/longUrl")
 	public ResponseEntity<Url> find(@PathVariable String code) {
+
+		code = code.replaceAll(Constants.PATTERN_BREAKING_CHARACTERS, "_");
+
 		logger.info(Constants.FINDING_LONG_URL, code);
 
 		ResponseEntity<Url> responseEntity;
@@ -85,6 +90,9 @@ public class UrlResources {
 
 	@PutMapping(value = "/{code}")
 	public ResponseEntity<Url> update(@Valid @RequestBody UrlUpdateDTO urlDto, @PathVariable String code) {
+
+		code = code.replaceAll(Constants.PATTERN_BREAKING_CHARACTERS, "_");
+
 		logger.info(Constants.UPDATING_URL, urlDto);
 
 		urlDto.setCode(code);
@@ -97,6 +105,9 @@ public class UrlResources {
 
 	@DeleteMapping(value = "/{code}")
 	public ResponseEntity<Url> delete(@PathVariable String code) {
+
+		code = code.replaceAll(Constants.PATTERN_BREAKING_CHARACTERS, "_");
+
 		logger.info(Constants.REMOVING_URL, code);
 
 		service.remove(code);

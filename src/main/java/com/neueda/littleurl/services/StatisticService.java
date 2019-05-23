@@ -20,23 +20,23 @@ import eu.bitwalker.useragentutils.UserAgent;
 
 @Service
 public class StatisticService {
-	
+
 	Logger logger = LoggerFactory.getLogger(StatisticService.class);
-	
+
 	@Autowired
 	private StatisticRepository repository;
 
 	public Statistic create(Statistic statistic) {
 		logger.info(Constants.CREATING_A_STATISTIC, statistic);
-		
+
 		statistic.setId(null);
-		return repository.save(statistic);		
+		return repository.save(statistic);
 	}
-	
+
 	public Statistic mapFrom(Map<String, String> headers, Url url) {
 
 		String userAgentString = headers.get(HttpHeaders.USER_AGENT.toLowerCase());
-		
+
 		logger.info(Constants.MAPPING_STATISTIC_FROM_HEADERS, userAgentString);
 
 		UserAgent agent = UserAgent.parseUserAgentString(userAgentString);
@@ -59,13 +59,16 @@ public class StatisticService {
 	}
 
 	public StatisticsSummaryDTO getStatisticsSummaryByCode(String code) {
+
+		code = code.replaceAll(Constants.PATTERN_BREAKING_CHARACTERS, "_");
+
 		logger.info(Constants.GETTING_STATISTICS_SUMMARY_BY_CODE, code);
-		
+
 		Long numberOfHits = repository.getNumberOfHitsByCode(code);
 		List<StatisticsDTO> browsers = repository.getBrowsersByCode(code);
 		List<StatisticsDTO> devicesTypes = repository.getDevicesTypesByCode(code);
 		List<StatisticsDTO> operatingSystems = repository.getOperatingSystemsByCode(code);
-		
+
 		return new StatisticsSummaryDTO(numberOfHits, browsers, devicesTypes, operatingSystems);
 	}
 }

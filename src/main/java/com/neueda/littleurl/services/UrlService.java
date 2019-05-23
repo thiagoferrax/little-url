@@ -19,24 +19,30 @@ import com.neueda.littleurl.util.Constants;
 
 @Service
 public class UrlService {
-	
+
 	Logger logger = LoggerFactory.getLogger(UrlService.class);
-	
+
 	@Autowired
 	private UrlRepository repository;
 
-	public Url find(String code) {
+	public Url find(String urlCode) {
+
+		final String code = urlCode.replaceAll(Constants.PATTERN_BREAKING_CHARACTERS, "_");
+
 		logger.info(Constants.FINDING_URL_BY_CODE, code);
-		
+
 		Optional<Url> optional = repository.findById(code);
 		return optional.orElseThrow(() -> new UrlNotFoundException(Constants.URL_NOT_FOUND_FOR_CODE + code));
 	}
 
 	private Url recursiveInsert(String longUrl, int startIndex, int endIndex) {
+
+		longUrl = longUrl.replaceAll(Constants.PATTERN_BREAKING_CHARACTERS, "_");
+
 		logger.info(Constants.RECURSIVE_INSERT, longUrl);
 
 		String code = UrlShortnerHelper.generateShortURL(longUrl, startIndex, endIndex);
-		
+
 		Url url;
 		try {
 			url = find(code);
@@ -76,6 +82,9 @@ public class UrlService {
 	}
 
 	public void remove(String code) {
+
+		code = code.replaceAll(Constants.PATTERN_BREAKING_CHARACTERS, "_");
+
 		logger.info(Constants.REMOVING_URL, code);
 
 		find(code);

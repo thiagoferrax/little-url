@@ -32,6 +32,9 @@ public class StatisticResources {
 
 	@GetMapping(path = "/summary/{code}")
 	public ResponseEntity<StatisticsSummaryDTO> getSummaryByCode(@PathVariable String code) {
+
+		code = code.replaceAll(Constants.PATTERN_BREAKING_CHARACTERS, "_");
+		
 		logger.info(Constants.GETTING_STATISTICS_SUMMARY_BY_CODE, code);
 
 		StatisticsSummaryDTO summary = service.getStatisticsSummaryByCode(code);
