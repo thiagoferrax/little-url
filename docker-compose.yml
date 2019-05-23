@@ -11,8 +11,6 @@ services:
          - POSTGRES_PASSWORD=postgres
       volumes:
          - data:/var/lib/postgresql/data
-      ports:
-         - 5432:5432
    backend:
       image: zenika/alpine-maven:3
       restart: always
