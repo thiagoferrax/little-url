@@ -37,6 +37,8 @@ public class StatisticService {
 
 		String userAgentString = headers.get(HttpHeaders.USER_AGENT.toLowerCase());
 
+		userAgentString = userAgentString.replaceAll(Constants.PATTERN_BREAKING_CHARACTERS, "_");
+		
 		logger.info(Constants.MAPPING_STATISTIC_FROM_HEADERS, userAgentString);
 
 		UserAgent agent = UserAgent.parseUserAgentString(userAgentString);
