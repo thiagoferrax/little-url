@@ -73,6 +73,8 @@ There are still other requirements that will guide the next steps of this API im
 │                       ├── helpers
 │                       │   └── UrlShortnerHelperTest.java
 │                       ├── resources
+│                       │   ├── exceptions
+│                       │   │   └── ResourceExceptionHandlerTest.java
 │                       │   ├── UrlResourcesTest.java
 │                       │   └── StatisticResourcesTest.java
 │                       └── services
