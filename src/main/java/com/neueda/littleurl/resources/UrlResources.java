@@ -25,7 +25,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.neueda.littleurl.domain.Statistic;
 import com.neueda.littleurl.domain.Url;
 import com.neueda.littleurl.dto.UrlDTO;
-import com.neueda.littleurl.dto.UrlUpdateDTO;
 import com.neueda.littleurl.services.StatisticService;
 import com.neueda.littleurl.services.UrlService;
 import com.neueda.littleurl.util.Constants;
@@ -89,14 +88,14 @@ public class UrlResources {
 	}
 
 	@PutMapping(value = "/{code}")
-	public ResponseEntity<Url> update(@Valid @RequestBody UrlUpdateDTO urlDto, @PathVariable String code) {
+	public ResponseEntity<Url> update(@Valid @RequestBody UrlDTO urlDto, @PathVariable String code) {
 
 		code = code.replaceAll(Constants.PATTERN_BREAKING_CHARACTERS, "_");
 
 		logger.info(Constants.UPDATING_URL, urlDto);
 
 		urlDto.setCode(code);
-		Url url = service.fromUpdateDTO(urlDto);
+		Url url = service.fromDTO(urlDto);
 
 		service.update(url);
 

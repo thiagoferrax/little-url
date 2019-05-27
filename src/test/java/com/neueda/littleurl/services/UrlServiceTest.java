@@ -16,7 +16,6 @@ import org.mockito.MockitoAnnotations;
 
 import com.neueda.littleurl.domain.Url;
 import com.neueda.littleurl.dto.UrlDTO;
-import com.neueda.littleurl.dto.UrlUpdateDTO;
 import com.neueda.littleurl.helpers.UrlShortnerHelper;
 import com.neueda.littleurl.repositories.UrlRepository;
 import com.neueda.littleurl.services.exceptions.UrlNotFoundException;
@@ -182,21 +181,6 @@ public class UrlServiceTest {
 		// When
 		UrlDTO urlDto = new UrlDTO(existingCode, existingLongUrl);
 		Url url = service.fromDTO(urlDto);
-
-		// Then
-		Url expectedUrl = new Url(existingCode, existingLongUrl);
-		assertEquals(expectedUrl, url);
-	}
-	
-	@Test
-	public void whenBuildingUrlFromUpdateDtoReturnAnUrlWithSameCodeAndLongUrl() {
-		// Given
-		String existingCode = "3077yW";
-		String existingLongUrl = "http://www.neueda.com";
-
-		// When
-		UrlUpdateDTO urlDto = new UrlUpdateDTO(existingCode, existingLongUrl);
-		Url url = service.fromUpdateDTO(urlDto);
 
 		// Then
 		Url expectedUrl = new Url(existingCode, existingLongUrl);

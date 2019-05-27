@@ -39,7 +39,6 @@ There are still other requirements that will guide the next steps of this API im
 │   │   │               │   └── Statistic.java
 │   │   │               ├── dto
 │   │   │               │   ├── UrlDTO.java
-│   │   │               │   ├── UrlUpdateDTO.java
 │   │   │               │   ├── StatisticsDTO.java
 │   │   │               │   └── StatisticsSummaryDTO.java
 │   │   │               ├── helpers
@@ -50,6 +49,9 @@ There are still other requirements that will guide the next steps of this API im
 │   │   │               │   ├── UrlRepository.java
 │   │   │               │   └── StatisticRepository.java
 │   │   │               ├── resources
+│   │   │               │   ├── exceptions
+│   │   │               │   │   ├── ResourceExceptionHandler.java
+│   │   │               │   │   └── StandardError.java
 │   │   │               │   ├── UrlResources.java
 │   │   │               │   └── StatisticResources.java
 │   │   │               ├── services
@@ -112,7 +114,7 @@ GET | http://localhost/urls/{code}/statistics | - | Get the statistics for a spe
 GET | http://localhost/statistics/summary | - | Get the statistics summary |
 GET | http://localhost/statistics/summary/{code} | - | Get the statistics summary for a specific url code |
 POST | http://localhost/urls/ | { "longUrl": "[http...]" } | Find or create url and return its shorten url in response headers | 
-PUT | http://localhost/urls/{code} | { "code": "[code]", "longUrl": "[http...]" } | Update url | 
+PUT | http://localhost/urls/{code} | { "longUrl": "[http...]" } | Update url | 
 DELETE | http://localhost/urls/{code} | - | Remove url | 
 
 ## License

@@ -24,7 +24,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.neueda.littleurl.domain.Url;
 import com.neueda.littleurl.dto.UrlDTO;
-import com.neueda.littleurl.dto.UrlUpdateDTO;
 import com.neueda.littleurl.helpers.UrlShortnerHelper;
 import com.neueda.littleurl.services.StatisticService;
 import com.neueda.littleurl.services.UrlService;
@@ -166,10 +165,10 @@ public class UrlResourcesTest {
 		String updatingLongUrl = "http://www.neueda.com/";
 		String existingCode = "3077yW";
 
-		UrlUpdateDTO urlDtoToFind = new UrlUpdateDTO(existingCode, updatingLongUrl);
+		UrlDTO urlDtoToFind = new UrlDTO(existingCode, updatingLongUrl);
 
 		Url urlToFind = new Url(existingCode, updatingLongUrl);
-		given(urlService.fromUpdateDTO(urlDtoToFind)).willReturn(urlToFind);
+		given(urlService.fromDTO(urlDtoToFind)).willReturn(urlToFind);
 
 		String inputJson = "{\"code\":\"3077yW\", \"longUrl\":\"http://www.neueda.com\"}";
 
