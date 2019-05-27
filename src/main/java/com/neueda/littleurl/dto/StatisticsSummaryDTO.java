@@ -12,9 +12,6 @@ public class StatisticsSummaryDTO implements Serializable {
 	private List<StatisticsDTO> devicesTypes;
 	private List<StatisticsDTO> operatingSystems;
 
-	public StatisticsSummaryDTO() {
-	}
-
 	public List<StatisticsDTO> getBrowsers() {
 		return browsers;
 	}
