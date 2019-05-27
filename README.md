@@ -50,8 +50,10 @@ There are still other requirements that will guide the next steps of this API im
 │   │   │               │   └── StatisticRepository.java
 │   │   │               ├── resources
 │   │   │               │   ├── exceptions
+│   │   │               │   │   ├── FieldMessage.java
 │   │   │               │   │   ├── ResourceExceptionHandler.java
-│   │   │               │   │   └── StandardError.java
+│   │   │               │   │   ├── StandardError.java
+│   │   │               │   │   └── ValidationError.java
 │   │   │               │   ├── UrlResources.java
 │   │   │               │   └── StatisticResources.java
 │   │   │               ├── services
