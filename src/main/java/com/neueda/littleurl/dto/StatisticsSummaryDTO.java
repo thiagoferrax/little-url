@@ -15,15 +15,6 @@ public class StatisticsSummaryDTO implements Serializable {
 	public StatisticsSummaryDTO() {
 	}
 
-	public StatisticsSummaryDTO(Long numberOfHits, List<StatisticsDTO> browsers, List<StatisticsDTO> devicesTypes,
-			List<StatisticsDTO> operatingSystems) {
-		super();
-		this.numberOfHits = numberOfHits;
-		this.browsers = browsers;
-		this.devicesTypes = devicesTypes;
-		this.operatingSystems = operatingSystems;
-	}
-
 	public List<StatisticsDTO> getBrowsers() {
 		return browsers;
 	}

@@ -44,13 +44,17 @@ public class StatisticResourcesTest {
 		List<StatisticsDTO> browsers = Arrays.asList(new StatisticsDTO[] { firefox, chrome });
 
 		StatisticsDTO computer = new StatisticsDTO("Computer", 3L);
-		List<StatisticsDTO> deviceTypes = Arrays.asList(new StatisticsDTO[] { computer });
+		List<StatisticsDTO> devicesTypes = Arrays.asList(new StatisticsDTO[] { computer });
 
 		StatisticsDTO linux = new StatisticsDTO("Linux", 3L);
-		List<StatisticsDTO> operationSystems = Arrays.asList(new StatisticsDTO[] { linux });
+		List<StatisticsDTO> operatingSystems = Arrays.asList(new StatisticsDTO[] { linux });
 
-		StatisticsSummaryDTO statisticsSummary = new StatisticsSummaryDTO(numberOfHits, browsers, deviceTypes,
-				operationSystems);
+		StatisticsSummaryDTO statisticsSummary = new StatisticsSummaryDTO();
+		statisticsSummary.setNumberOfHits(numberOfHits);
+		statisticsSummary.setBrowsers(browsers);
+		statisticsSummary.setDevicesTypes(devicesTypes);
+		statisticsSummary.setOperatingSystems(operatingSystems);
+		
 		given(statisticService.getStatisticsSummary()).willReturn(statisticsSummary);
 
 		// When and Then
@@ -69,13 +73,17 @@ public class StatisticResourcesTest {
 		List<StatisticsDTO> browsers = Arrays.asList(new StatisticsDTO[] { firefox, chrome });
 
 		StatisticsDTO computer = new StatisticsDTO("Computer", 3L);
-		List<StatisticsDTO> deviceTypes = Arrays.asList(new StatisticsDTO[] { computer });
+		List<StatisticsDTO> devicesTypes = Arrays.asList(new StatisticsDTO[] { computer });
 
 		StatisticsDTO linux = new StatisticsDTO("Linux", 3L);
-		List<StatisticsDTO> operationSystems = Arrays.asList(new StatisticsDTO[] { linux });
+		List<StatisticsDTO> operatingSystems = Arrays.asList(new StatisticsDTO[] { linux });
 
-		StatisticsSummaryDTO statisticsSummary = new StatisticsSummaryDTO(numberOfHits, browsers, deviceTypes,
-				operationSystems);
+		StatisticsSummaryDTO statisticsSummary = new StatisticsSummaryDTO();
+		statisticsSummary.setNumberOfHits(numberOfHits);
+		statisticsSummary.setBrowsers(browsers);
+		statisticsSummary.setDevicesTypes(devicesTypes);
+		statisticsSummary.setOperatingSystems(operatingSystems);
+		
 		given(statisticService.getStatisticsSummaryByCode(code)).willReturn(statisticsSummary);
 
 		// When and Then

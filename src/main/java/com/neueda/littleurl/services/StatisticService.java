@@ -1,6 +1,5 @@
 package com.neueda.littleurl.services;
 
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.neueda.littleurl.domain.Statistic;
 import com.neueda.littleurl.domain.Url;
-import com.neueda.littleurl.dto.StatisticsDTO;
 import com.neueda.littleurl.dto.StatisticsSummaryDTO;
 import com.neueda.littleurl.repositories.StatisticRepository;
 import com.neueda.littleurl.util.Constants;
@@ -38,7 +36,7 @@ public class StatisticService {
 		String userAgentString = headers.get(HttpHeaders.USER_AGENT.toLowerCase());
 
 		userAgentString = userAgentString.replaceAll(Constants.PATTERN_BREAKING_CHARACTERS, "_");
-		
+
 		logger.info(Constants.MAPPING_STATISTIC_FROM_HEADERS, userAgentString);
 
 		UserAgent agent = UserAgent.parseUserAgentString(userAgentString);
@@ -52,12 +50,13 @@ public class StatisticService {
 	public StatisticsSummaryDTO getStatisticsSummary() {
 		logger.info(Constants.GETTING_STATISTICS_SUMMARY);
 
-		Long numberOfHits = repository.getNumberOfHits();
-		List<StatisticsDTO> browsers = repository.getBrowsers();
-		List<StatisticsDTO> devicesTypes = repository.getDevicesTypes();
-		List<StatisticsDTO> operatingSystems = repository.getOperatingSystems();
+		StatisticsSummaryDTO summaryDTO = new StatisticsSummaryDTO();
+		summaryDTO.setNumberOfHits(repository.getNumberOfHits());
+		summaryDTO.setBrowsers(repository.getBrowsers());
+		summaryDTO.setDevicesTypes(repository.getDevicesTypes());
+		summaryDTO.setOperatingSystems(repository.getOperatingSystems());
 
-		return new StatisticsSummaryDTO(numberOfHits, browsers, devicesTypes, operatingSystems);
+		return summaryDTO;
 	}
 
 	public StatisticsSummaryDTO getStatisticsSummaryByCode(String code) {
@@ -66,11 +65,12 @@ public class StatisticService {
 
 		logger.info(Constants.GETTING_STATISTICS_SUMMARY_BY_CODE, code);
 
-		Long numberOfHits = repository.getNumberOfHitsByCode(code);
-		List<StatisticsDTO> browsers = repository.getBrowsersByCode(code);
-		List<StatisticsDTO> devicesTypes = repository.getDevicesTypesByCode(code);
-		List<StatisticsDTO> operatingSystems = repository.getOperatingSystemsByCode(code);
+		StatisticsSummaryDTO summaryDTO = new StatisticsSummaryDTO();
+		summaryDTO.setNumberOfHits(repository.getNumberOfHitsByCode(code));
+		summaryDTO.setBrowsers(repository.getBrowsersByCode(code));
+		summaryDTO.setDevicesTypes(repository.getDevicesTypesByCode(code));
+		summaryDTO.setOperatingSystems(repository.getOperatingSystemsByCode(code));
 
-		return new StatisticsSummaryDTO(numberOfHits, browsers, devicesTypes, operatingSystems);
+		return summaryDTO;
 	}
 }
