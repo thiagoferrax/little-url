@@ -123,4 +123,4 @@ DELETE | http://localhost/urls/{code} | - | Remove url |
 
 ## License
 
-MIT © [thiagoferrax](https://github.com/thiagoferrax)
+MIT © [thiagoferrax](https://github.com/thiagoferrax).
