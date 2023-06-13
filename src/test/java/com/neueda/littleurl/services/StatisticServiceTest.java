@@ -1,4 +1,4 @@
-package com.neueda.littleurl.services;
+package com.thiagoferraz.littleurl.services;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,11 +14,11 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpHeaders;
 
-import com.neueda.littleurl.domain.Statistic;
-import com.neueda.littleurl.domain.Url;
-import com.neueda.littleurl.dto.StatisticsDTO;
-import com.neueda.littleurl.dto.StatisticsSummaryDTO;
-import com.neueda.littleurl.repositories.StatisticRepository;
+import com.thiagoferraz.littleurl.domain.Statistic;
+import com.thiagoferraz.littleurl.domain.Url;
+import com.thiagoferraz.littleurl.dto.StatisticsDTO;
+import com.thiagoferraz.littleurl.dto.StatisticsSummaryDTO;
+import com.thiagoferraz.littleurl.repositories.StatisticRepository;
 
 public class StatisticServiceTest {
 
@@ -37,7 +37,7 @@ public class StatisticServiceTest {
 	public void whenCreatingAStatisticVerifyThatRepositorySaveIsCalled() {
 
 		// Given
-		Url url = new Url("3077yW", "http://www.neueda.com");
+		Url url = new Url("3077yW", "http://www.thiagoferraz.com");
 		Statistic statistic = new Statistic("Firefox 7", "Computer", "Windows XP", url);
 		
 		// When
@@ -50,7 +50,7 @@ public class StatisticServiceTest {
 	@Test
 	public void whenMappingFromHeadersAndStatisticReturnsStatistic() {
 		// Given
-		Url url = new Url("3077yW", "http://www.neueda.com");
+		Url url = new Url("3077yW", "http://www.thiagoferraz.com");
 		
 		Map<String, String> headers = new HashMap<>();
 		headers.put(HttpHeaders.USER_AGENT.toLowerCase(), "Mozilla/5.0 (Windows NT 5.1; rv:7.0.1) Gecko/20100101 Firefox/7.0.1");

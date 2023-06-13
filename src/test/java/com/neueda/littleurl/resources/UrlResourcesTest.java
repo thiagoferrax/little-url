@@ -1,7 +1,7 @@
-package com.neueda.littleurl.resources;
+package com.thiagoferraz.littleurl.resources;
 
-import static com.neueda.littleurl.util.Constants.URL_CODE_SIZE;
-import static com.neueda.littleurl.util.Constants.URL_NOT_FOUND_FOR_CODE;
+import static com.thiagoferraz.littleurl.util.Constants.URL_CODE_SIZE;
+import static com.thiagoferraz.littleurl.util.Constants.URL_NOT_FOUND_FOR_CODE;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -22,12 +22,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.neueda.littleurl.domain.Url;
-import com.neueda.littleurl.dto.UrlDTO;
-import com.neueda.littleurl.helpers.UrlShortnerHelper;
-import com.neueda.littleurl.services.StatisticService;
-import com.neueda.littleurl.services.UrlService;
-import com.neueda.littleurl.services.exceptions.UrlNotFoundException;
+import com.thiagoferraz.littleurl.domain.Url;
+import com.thiagoferraz.littleurl.dto.UrlDTO;
+import com.thiagoferraz.littleurl.helpers.UrlShortnerHelper;
+import com.thiagoferraz.littleurl.services.StatisticService;
+import com.thiagoferraz.littleurl.services.UrlService;
+import com.thiagoferraz.littleurl.services.exceptions.UrlNotFoundException;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
@@ -47,13 +47,13 @@ public class UrlResourcesTest {
 		// Given
 		String existingCode = "3077yW";
 
-		Url url = new Url(existingCode, "http://www.neueda.com");
+		Url url = new Url(existingCode, "http://www.thiagoferraz.com");
 
 		given(urlService.find(existingCode)).willReturn(url);
 
 		// When and Then
 		this.mockMvc.perform(get("/urls/" + existingCode + "/longUrl")).andExpect(status().isOk())
-				.andExpect(content().json("{'code': '3077yW','longUrl': 'http://www.neueda.com'}"));
+				.andExpect(content().json("{'code': '3077yW','longUrl': 'http://www.thiagoferraz.com'}"));
 	}
 
 	@Test
@@ -73,7 +73,7 @@ public class UrlResourcesTest {
 		// Given
 		String existingCode = "3077yW";
 
-		Url url = new Url(existingCode, "http://www.neueda.com");
+		Url url = new Url(existingCode, "http://www.thiagoferraz.com");
 
 		given(urlService.find(existingCode)).willReturn(url);
 
@@ -137,7 +137,7 @@ public class UrlResourcesTest {
 	public void whenLongUrlExistsThenReturnExistingCode() throws Exception {
 		// Given
 		String code = null;
-		String existingLongUrl = "http://www.neueda.com";
+		String existingLongUrl = "http://www.thiagoferraz.com";
 		UrlDTO urlDtoToFind = new UrlDTO(code, existingLongUrl);
 
 		int startIndex = 0;
@@ -150,7 +150,7 @@ public class UrlResourcesTest {
 		Url existingUrl = new Url(existingCode, existingLongUrl);
 		given(urlService.findOrCreate(urlToFind)).willReturn(existingUrl);
 
-		String inputJson = "{\"longUrl\":\"http://www.neueda.com\"}";
+		String inputJson = "{\"longUrl\":\"http://www.thiagoferraz.com\"}";
 
 		// When and Then
 		this.mockMvc.perform(post("/urls/").contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
@@ -162,7 +162,7 @@ public class UrlResourcesTest {
 	@Test
 	public void whenUpdatingAnUrlReturnsStatusNoContent() throws Exception {
 		// Given
-		String updatingLongUrl = "http://www.neueda.com/";
+		String updatingLongUrl = "http://www.thiagoferraz.com/";
 		String existingCode = "3077yW";
 
 		UrlDTO urlDtoToFind = new UrlDTO(existingCode, updatingLongUrl);
@@ -170,7 +170,7 @@ public class UrlResourcesTest {
 		Url urlToFind = new Url(existingCode, updatingLongUrl);
 		given(urlService.fromDTO(urlDtoToFind)).willReturn(urlToFind);
 
-		String inputJson = "{\"code\":\"3077yW\", \"longUrl\":\"http://www.neueda.com\"}";
+		String inputJson = "{\"code\":\"3077yW\", \"longUrl\":\"http://www.thiagoferraz.com\"}";
 
 		// When and Then
 		this.mockMvc

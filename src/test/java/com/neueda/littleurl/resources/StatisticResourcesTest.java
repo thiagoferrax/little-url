@@ -1,4 +1,4 @@
-package com.neueda.littleurl.resources;
+package com.thiagoferraz.littleurl.resources;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -16,10 +16,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.neueda.littleurl.dto.StatisticsDTO;
-import com.neueda.littleurl.dto.StatisticsSummaryDTO;
-import com.neueda.littleurl.services.StatisticService;
-import com.neueda.littleurl.services.UrlService;
+import com.thiagoferraz.littleurl.dto.StatisticsDTO;
+import com.thiagoferraz.littleurl.dto.StatisticsSummaryDTO;
+import com.thiagoferraz.littleurl.services.StatisticService;
+import com.thiagoferraz.littleurl.services.UrlService;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest

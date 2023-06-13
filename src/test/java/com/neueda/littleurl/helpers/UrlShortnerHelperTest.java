@@ -1,4 +1,4 @@
-package com.neueda.littleurl.helpers;
+package com.thiagoferraz.littleurl.helpers;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,7 +7,7 @@ public class UrlShortnerHelperTest {
 	
 	@Test
 	public void sameLongUrlsShouldResultSameHash() {
-		String longUrl = "www.neueda.com";
+		String longUrl = "www.thiagoferraz.com";
 		int startIndex = 0;
 		int endIndex = 5;
 		
@@ -19,7 +19,7 @@ public class UrlShortnerHelperTest {
 	
 	@Test
 	public void differentLongUrlsShouldResultDifferentHashes() {
-		String longUrl1 = "www.neueda.com";
+		String longUrl1 = "www.thiagoferraz.com";
 		String longUrl2 = "www.google.com";
 		int startIndex = 0;
 		int endIndex = 5;
@@ -32,7 +32,7 @@ public class UrlShortnerHelperTest {
 	
 	@Test
 	public void hashSizeMustBeConsistentWithStartAndEndIndexes() {
-		String longUrl = "www.neueda.com";
+		String longUrl = "www.thiagoferraz.com";
 		int startIndex = 0;
 		int endIndex = 5;
 		

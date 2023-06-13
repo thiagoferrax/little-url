@@ -1,7 +1,7 @@
-package com.neueda.littleurl.services;
+package com.thiagoferraz.littleurl.services;
 
-import static com.neueda.littleurl.util.Constants.URL_CODE_SIZE;
-import static com.neueda.littleurl.util.Constants.URL_NOT_FOUND_FOR_CODE;
+import static com.thiagoferraz.littleurl.util.Constants.URL_CODE_SIZE;
+import static com.thiagoferraz.littleurl.util.Constants.URL_NOT_FOUND_FOR_CODE;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Optional;
@@ -14,11 +14,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.neueda.littleurl.domain.Url;
-import com.neueda.littleurl.dto.UrlDTO;
-import com.neueda.littleurl.helpers.UrlShortnerHelper;
-import com.neueda.littleurl.repositories.UrlRepository;
-import com.neueda.littleurl.services.exceptions.UrlNotFoundException;
+import com.thiagoferraz.littleurl.domain.Url;
+import com.thiagoferraz.littleurl.dto.UrlDTO;
+import com.thiagoferraz.littleurl.helpers.UrlShortnerHelper;
+import com.thiagoferraz.littleurl.repositories.UrlRepository;
+import com.thiagoferraz.littleurl.services.exceptions.UrlNotFoundException;
 
 public class UrlServiceTest {
 
@@ -38,7 +38,7 @@ public class UrlServiceTest {
 		// Given
 		String existingCode = "3077yW";
 
-		Url existingUrl = new Url(existingCode, "http://www.neueda.com");
+		Url existingUrl = new Url(existingCode, "http://www.thiagoferraz.com");
 		Optional<Url> optional = Optional.of(existingUrl);
 		Mockito.when(repository.findById(existingCode)).thenReturn(optional);
 
@@ -65,7 +65,7 @@ public class UrlServiceTest {
 	public void whenLongUrlDoesNotExistSaveItAndReturnNewUrlCode() {
 		// Given
 		String code = null;
-		String notExistingLongUrl = "http://www.neueda.com";
+		String notExistingLongUrl = "http://www.thiagoferraz.com";
 		Url urlToCreate = new Url(code, notExistingLongUrl);
 
 		int startIndex = 0;
@@ -89,7 +89,7 @@ public class UrlServiceTest {
 	public void whenLongUrlExistsFindItAndReturnExistingUrlCode() {
 		// Given
 		String code = null;
-		String existingLongUrl = "http://www.neueda.com";
+		String existingLongUrl = "http://www.thiagoferraz.com";
 		Url urlToCreate = new Url(code, existingLongUrl);
 
 		int startIndex = 0;
@@ -118,7 +118,7 @@ public class UrlServiceTest {
 		int endIndex = startIndex + URL_CODE_SIZE - 1;
 		String existingCode = UrlShortnerHelper.generateShortURL(notExistingLongUrl, startIndex, endIndex);
 
-		Url existingUrl = new Url(existingCode, "http://www.neueda.com");
+		Url existingUrl = new Url(existingCode, "http://www.thiagoferraz.com");
 		Optional<Url> optional = Optional.of(existingUrl);
 		Mockito.when(repository.findById(existingCode)).thenReturn(optional);
 
@@ -143,7 +143,7 @@ public class UrlServiceTest {
 	public void whenUpdatinAnUrlVerifyThatRepositorySaveIsCalled() {
 		// Given
 		String existingCode = "3077yW";
-		String existingLongUrl = "http://www.neueda.com";
+		String existingLongUrl = "http://www.thiagoferraz.com";
 		Url existingUrl = new Url(existingCode, existingLongUrl);
 
 		Optional<Url> optional = Optional.of(existingUrl);
@@ -161,7 +161,7 @@ public class UrlServiceTest {
 		// Given
 		String existingCode = "3077yW";
 
-		Url existingUrl = new Url(existingCode, "http://www.neueda.com");
+		Url existingUrl = new Url(existingCode, "http://www.thiagoferraz.com");
 		Optional<Url> optional = Optional.of(existingUrl);
 		Mockito.when(repository.findById(existingCode)).thenReturn(optional);
 		
@@ -176,7 +176,7 @@ public class UrlServiceTest {
 	public void whenBuildingUrlFromDtoReturnAnUrlWithSameCodeAndLongUrl() {
 		// Given
 		String existingCode = "3077yW";
-		String existingLongUrl = "http://www.neueda.com";
+		String existingLongUrl = "http://www.thiagoferraz.com";
 
 		// When
 		UrlDTO urlDto = new UrlDTO(existingCode, existingLongUrl);

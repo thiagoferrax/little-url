@@ -1,4 +1,4 @@
-package com.neueda.littleurl.resources.exceptions;
+package com.thiagoferraz.littleurl.resources.exceptions;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -20,8 +20,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import com.neueda.littleurl.dto.UrlDTO;
-import com.neueda.littleurl.services.exceptions.UrlNotFoundException;
+import com.thiagoferraz.littleurl.dto.UrlDTO;
+import com.thiagoferraz.littleurl.services.exceptions.UrlNotFoundException;
 
 public class ResourceExceptionHandlerTest {
 

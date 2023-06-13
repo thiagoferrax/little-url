@@ -2,7 +2,7 @@
 > 
 
 [![Build Status](https://travis-ci.org/thiagoferrax/little-url.svg?branch=master)](https://travis-ci.org/thiagoferrax/little-url)
-[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=com.neueda%3Alittleurl&metric=alert_status)](https://sonarcloud.io/dashboard/index/com.neueda%3Alittleurl)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=com.thiagoferraz%3Alittleurl&metric=alert_status)](https://sonarcloud.io/dashboard/index/com.thiagoferraz%3Alittleurl)
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
 
 ## About
@@ -32,7 +32,7 @@ There are still other requirements that will guide the next steps of this API im
 │   ├── main
 │   │   ├── java
 │   │   │   └── com
-│   │   │       └── neueda
+│   │   │       └── thiagoferraz
 │   │   │           └── littleurl
 │   │   │               ├── domain
 │   │   │               │   ├── Url.java
@@ -68,7 +68,7 @@ There are still other requirements that will guide the next steps of this API im
 │   └── test
 │       └── java
 │           └── com
-│               └── neueda
+│               └── thiagoferraz
 │                   └── littleurl
 │                       ├── helpers
 │                       │   └── UrlShortnerHelperTest.java
